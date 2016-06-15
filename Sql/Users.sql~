@@ -1,0 +1,93 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
+--
+-- ホスト: localhost
+-- 生成日時: 2016 年 5 月 23 日 13:04
+-- サーバのバージョン: 5.5.49-0ubuntu0.14.04.1
+-- PHP のバージョン: 5.5.9-1ubuntu4.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+-- drop database Users;
+-- create database if not exists Users;
+use Users;
+--
+-- データベース: `Users`
+--
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `ClassAttendTable`
+--
+
+CREATE TABLE IF NOT EXISTS `ClassAttendTable` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Date` date DEFAULT NULL COMMENT '出席日',
+  `Time` int(16) DEFAULT NULL COMMENT '時限目（１〜５）',
+  `Type` int(4) DEFAULT NULL COMMENT '出席：0 遅刻：1 欠席：2 就活：3 病欠：4 登校前:8',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `FaceTable`
+--
+
+
+CREATE TABLE IF NOT EXISTS `FaceTable` (
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `imagePath` varchar(256) DEFAULT NULL COMMENT '顔面パス',
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- テーブルのデータのダンプ `FaceTable`
+--
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `SchoolAttendTable`
+--
+
+CREATE TABLE IF NOT EXISTS `SchoolAttendTable` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Time` int(16) NOT NULL COMMENT '登下校時間（unixTime）',
+  `Type` int(2) NOT NULL COMMENT '教師＝１、生徒＝０',
+  `Checking` int(2) NOT NULL COMMENT '０＝登校、１＝下校、２＝異常下校',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+--
+-- テーブルのデータのダンプ `SchoolAttendTable`
+--
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `UserTable`
+--
+
+CREATE TABLE IF NOT EXISTS `UserTable` (
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Name` varchar(50) CHARACTER SET utf32 NOT NULL COMMENT '名前',
+  `Type` int(11) NOT NULL COMMENT '教師＝１、生徒＝０',
+  `Password` varchar(100) CHARACTER SET utf32 NOT NULL COMMENT 'パスワード',
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- テーブルのデータのダンプ `UserTable`
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,277 @@
+@font-face {
+font-family: 'mf';
+src: url('font/mplus-2p-medium.ttf') format('truetype');
+}
+
+* {
+  margin:0;
+  padding:0;
+  font-family:"mf";
+  overflow:visible;
+  font-weight:normal;
+}
+
+html {
+  height:100%;
+}
+
+body {
+  height:100%;
+  position:relative;
+}
+
+#screen_green {
+  width:100%;
+  height:100%;
+  background-image:url(img/bg_sq.png);
+  background-size:100% 100%;
+  background-color:#6CB352;
+}
+
+#screen_blue {
+  width:100%;
+  height:100%;
+  background-image:url(img/bg_sq.png);
+  background-size:100% 100%;
+  background-color:#29ABE2;
+}
+
+#screen_red {
+  width:100%;
+  height:100%;
+  background-image:url(img/bg_sq.png);
+  background-size:100% 100%;
+  background-color:#AC0048;
+}
+
+#screen_yellow {
+  width:100%;
+  height:100%;
+  background-image:url(img/bg_sq.png);
+  background-size:100% 100%;
+  background-color:#E17D00;
+}
+
+#screen_capcha {
+  width:1200px;
+  height:100%;
+  position:static;
+}
+
+
+#ck {
+  width:150px;
+  height:126px;
+  float:left;
+  background-image:url(img/check.png);
+  background-size:contain;
+  background-repeat:no-repeat;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  margin-top:67px;
+  margin-right:30px;
+}
+
+h1#status {
+  display:block;
+  font-size:155px;
+  font-weight:normal;
+  color:#fff;
+  float:left;
+  margin-right:24px;
+}
+
+h1#waiting {
+  display:block;
+  font-size:60px;
+  font-weight:normal;
+  color:#fff;
+  float:left;
+  margin-right:24px;
+}
+
+h1#waiting2 {
+  display:block;
+  font-size:40px;
+  font-weight:normal;
+  color:#fff;
+
+}
+
+#text_box {
+  color:#fff;
+  width:1200px;
+  height:100%;
+  font-size:20px;
+}
+
+#bigtext_box {
+  color:#fff;
+  width:1100px;
+  height:100%;
+  font-size:20px;
+  text-align:center;
+  margin-right:-350px;
+  overflow: visible;
+  margin-top:-57px;
+}
+
+.marginner {
+  margin-left:190px;
+  display:block;
+}
+
+#name {
+  font-size:59px;
+  font-weight:normal;
+
+  color:#fff;
+}
+
+#screen_box {
+		margin: -200px 0 0 -600px;  /*縦横の半分をネガティブマージンでずらす*/
+  		position: fixed;  /*body要素に対して絶対配置*/
+  		top: 46%;  /*上端を中央に*/
+  		left: 50%;  /*左端を中央に*/
+  		width: 1200px;  /*横幅*/
+  		height: 400px;  /*縦幅*/
+      float:left;
+}
+
+#status_box {
+  		position: fixed;
+  		bottom:0;
+  		width: 100%;
+  		height: 95px;
+      padding-top:5px;
+
+      color:#fff;
+      display:table-cell;
+      vertical-align:middle;
+      text-align:center;
+}
+
+#footest {
+  width:100%;
+  height:100%;
+  display:table-cell;
+  vertical-align:middle;
+}
+
+.clock_txt{
+  color:#fff;
+  font-size:40px;
+}
+
+.bigclock_txt{
+  color:#fff;
+  font-size:280px;
+}
+
+
+#select_box {
+  width:100%;
+  margin-top:30px;
+  display:block;
+  text-decoration:none;
+}
+
+#choice_btn {
+  width:1200px;
+  height:70px;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+  background-color:rgba(0,0,0,0.4);
+  font-size:25px;
+  color:#fff;
+}
+
+.closer {
+  font-size:30px;
+  margin-top:95px;
+  font-weight:normal;
+}
+
+#choice_btn2 {
+  width:1100px;
+  height:70px;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+  background-color:rgba(0,0,0,0.4);
+  font-size:25px;
+  color:#fff;
+  text-decoration:none;
+}
+
+#choice_btn3 {
+  width:380px;
+  height:80px;
+  display:block;
+  vertical-align:middle;
+  text-align:center;
+  background-color:rgba(0,0,0,0.4);
+  font-size:25px;
+  color:#fff;
+  text-decoration:none;
+  float:left;
+  margin-right:30px;
+}
+
+#choice_btn3:hover {
+  opacity:0.6;
+}
+
+.tabler {
+  width:380px;
+  height:80px;
+  display:table-cell;
+  vertical-align:middle;
+  text-align:center;
+}
+
+.closer2 {
+  font-size:35px;
+  margin-top:94px;
+  font-weight:normal;
+}
+
+
+
+#choice_btn p {
+  color:#fff;
+  font-size:1em;
+}
+
+
+#liliq {
+  display:block;
+  position:absolute;
+  top:50px;
+  left:50px;
+  width:160px;
+  height:45px;
+}
+
+#LILIQ2 {
+  display:block;
+  width:100px;
+  height:25px;
+  margin:40px auto 0 auto;
+}
+
+/*
+#face_box {
+  background-color:#ccc;
+  height:240px;
+  width:210px;
+  float:right;
+  margin-top:30px;
+}*/
+
+.iti {
+  display:block;
+  margin-top:30px;
+}

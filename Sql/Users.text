@@ -1,0 +1,17 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+drop database if exists  Users;
+create database Users;
+use database;
+create table UserTable(UserId varchar(10) primary key not null
+			Name varchar(50) not null,
+			Type int default null,
+			Password varchar(100) default null);
+create table SchoolAttendTable(id int primary key auto_increment,
+				UserId varchar(10) not null,			
+				Time int default 0,
+				Type int default 0,
+				Check int default 0);

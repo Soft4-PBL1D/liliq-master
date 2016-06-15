@@ -1,0 +1,25 @@
+span.day {
+	display: inline-block;
+	width: 150;
+	height: 100;
+	border-width: thin;
+	border-style: solid;
+	position: relative;
+}
+span.date {
+	height: 30;
+}
+span.text {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	font-size: 20;
+}
+span.prev {
+	color: #AAA !important;
+}
+span.holid {
+	background-color: #DDD;
+	color: #555;
+	border-color: #000;
+}
