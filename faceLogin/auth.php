@@ -1,5 +1,5 @@
 <?php
-	file_put_contents('au', "===========\n", FILE_APPEND);
+#	file_put_contents('au', "===========\n", FILE_APPEND);
 	$fp = fopen('/tmp/futa.lock', 'r');
         if (flock($fp, LOCK_EX | LOCK_NB) == FALSE) {
                 die('continue');
@@ -27,7 +27,7 @@
 		$num = shell_exec("puzzle-diff -c -t /opt/upload/authimg /opt/upload/reg/$file");
 		$num = rtrim($num);
 #		$num = abs(1 - $num);
-		file_put_contents('au', "$file:$num\n", FILE_APPEND);
+	#	file_put_contents('au', "$file:$num\n", FILE_APPEND);
 		if ($num != '' && $num < 0.38) {
 			echo "You are $file";
 			session_start();
