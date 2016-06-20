@@ -10,7 +10,7 @@
 	$uploaddir = '/opt/upload/';
 	$fileName = 'authimg';
 	$uploadfile = $uploaddir . $fileName;
-	file_put_contents($uploadfile, base64_decode($data));
+#	file_put_contents($uploadfile, base64_decode($data));
 	$authSig = puzzle_fill_cvec_from_file($uploadfile);
 	$imgList = scandir('/opt/upload/reg/');
 	chmod('/opt/upload/authimg', 0777);
@@ -27,8 +27,8 @@
 		$num = shell_exec("puzzle-diff -c -t /opt/upload/authimg /opt/upload/reg/$file");
 		$num = rtrim($num);
 #		$num = abs(1 - $num);
-	#	file_put_contents('au', "$file:$num\n", FILE_APPEND);
-		if ($num != '' && $num < 0.38) {
+#		file_put_contents('au', "$file:$num\n", FILE_APPEND);
+		if ($num != '' && $num < 0.4) {
 			echo "You are $file";
 			session_start();
 			$_SESSION['userid'] = $file;
