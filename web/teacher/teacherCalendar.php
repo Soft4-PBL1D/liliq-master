@@ -3,6 +3,10 @@ require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
 $nowY=$ClassAttendDB->nowY;
+
+//登校日、または休校日変更
+
+
 	// $year = @$_GET['year'];
 	$month = @$_GET['month'];
 	if(!isset($month)||$month>12||$month<1){
@@ -67,21 +71,21 @@ $nowY=$ClassAttendDB->nowY;
 	<h2 class='title'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
-		<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
-		<a href="calendar.php?month=1"> > </a>
+		<a href="teacherCalendar.php?month=<?php echo $month-1?>"> < </a>
+		<a href="teacherCalendar.php?month=1"> > </a>
 		<?php }else if($month==1){?>
-			<a href="calendar.php?month=12"> < </a>
-			<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+			<a href="teacherCalendar.php?month=12"> < </a>
+			<a href="teacherCalendar.php?month=<?php echo $month+1?>"> >  </a>
 			<?php }else if($month==4){?>
-				<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href="teacherCalendar.php?month=<?php echo $month+1?>"> >  </a>
 			<?php }else if($month!=3){?>
-				<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
-				<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href="teacherCalendar.php?month=<?php echo $month-1?>"> < </a>
+				<a href="teacherCalendar.php?month=<?php echo $month+1?>"> >  </a>
 	<?php }else{?>
-		<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
+		<a href="teacherCalendar.php?month=<?php echo $month-1?>"> < </a>
 		<?php } ?>
 <h2>月の指定：
-<form method="GET" action="calendar.php">
+<form method="GET" action="teacherCalendar.php">
 <SELECT name="month">
 <OPTION value="4">4</OPTION>
 <OPTION value="5">5</OPTION>
@@ -122,7 +126,7 @@ $ClassAttendDB->Calendar($year,$month);
 			if ($dayPointer < 0) {
 				$prevDay = getMonthDayNum(($month == 1 ? $year - 1 : $year), ($month == 1 ? 12 : $month - 1)) + $dayPointer + 1;
 				echo "<span class='day$restClass'><span class='text prev'>{$prevDay}日
-				</span><font size=1><br></font></span>";
+				</span><font size=1><br>&nbsp;</font></span>";
 				$dayPointer++;
 				continue;
 			}
@@ -130,16 +134,11 @@ $ClassAttendDB->Calendar($year,$month);
 	    // $type=$ClassAttendDB->Attend_select($_SESSION["USERID"],$year."-".$month."-".$day);
       for($i=0;$i<$dayPointer+1;$i++){
       if($ClassAttendDB->calendar[$day]==$day){
-        echo "<span class='day holid'><span class='text'>{$day}日</span><font size=1>休日</font></span>";
+        echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day holid'><span class='text'>{$day}日</span><font size=1>休日<br>&nbsp;</font></span></a>";
 			}else{
-				// if($type==0)
-    			// echo "<span class='day$restClass'><span class='text'>{$day}日○</span><font size=1>登校日<br></font></span>";
-    			//遅刻、結石があれば
-    			// else if ($type!=8 && $type!=0)
-    			// echo "<span class='day$restClass'><span class='text'>{$day}日●</span><font size=1>登校日<br></font></span>";
-    			// else
-    			echo "<span class='day'><span class='text'>{$day}日</span><font size=1>登校日</font></span>";
-          // echo "<span class='day'><span class='text'>{$day}日</span></span>";
+				// $ClassAttendDB->startTime($year."-".$month."-".$day);
+				$ClassAttendDB->startTime($year."-".$month."-".$day);
+    			echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day attend'><span class='text'>{$day}日</span><font size=1>登校日<br>{$ClassAttendDB->starttime}〜{$ClassAttendDB->endtime}</font></span></a>";
      }
       break;
     }

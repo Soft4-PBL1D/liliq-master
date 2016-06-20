@@ -27,6 +27,7 @@ function getHolidays($year) {
 			$date = strtotime((string) $item->start->date);
 			$title = (string) $item->summary;
 			$holidays[$i]=date("Y-m-d",$date);
+			echo $holidays[$i];
 			$i=$i+1;
       // echo date("Y-m-d",$date)."<br>";
 		}
@@ -133,5 +134,6 @@ function nowYearAllInsert(){
 
 }
 nowYearAllInsert();
+// getHolidays("2016");
 nowUser();
 ?>

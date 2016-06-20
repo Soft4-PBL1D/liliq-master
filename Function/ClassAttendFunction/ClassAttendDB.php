@@ -317,6 +317,18 @@ class ClassAttendDB {
 
       }
     }
+      function startTime($date){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+          $sql="select  Date_format(from_unixtime(SchoolStartTime),'%H:%i'),Date_format(from_unixtime(SchoolEndTime),'%H:%i') from SchoolDayTable where Date= ? and SchoolDay=0";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($date));
+          while($cal=$stmt->fetch(PDO::FETCH_ASSOC)){
+            $this->starttime=$cal["Date_format(from_unixtime(SchoolStartTime),'%H:%i')"];
+            $this->endtime=$cal["Date_format(from_unixtime(SchoolEndTime),'%H:%i')"];
+      }
+    }
       //登校日の編集
       function AttendDayUpdate($check,$Date){
         $this->construct("localhost","root","soft4","pbl");
@@ -337,10 +349,88 @@ class ClassAttendDB {
                     $this->nowY=$cal["YEAR(Date)"];
         }
       }
+      function StundentsAttend($Date){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+      //
+      //   //登校済み
+        $sql="select U.UserId,Name,S.Type,Time from SchoolAttendTable as S join UserTable as U on S.UserId=U.UserId  where  from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') and S.Type=? group by S.UserId;";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($Date,0));
+        $i=0;
+        while($attend=$stmt->fetch(PDO::FETCH_ASSOC)){
+            $this->attend[$i][userid]=$attend[UserId];
+            $this->attend[$i][name]=$attend[Name];
+            $this->attend[$i][type]=$attend[Type];
+            $this->attend[$i][time]=$attend[Time];
 
-    }
+              $i=$i+1;
+        }
+      // // 未登校
+      $sql="select * from UserTable where UserId not in(select UserId from SchoolAttendTable where from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') group by UserId)and UserId!=?";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($Date,"teacher"));
+      while($attend=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $this->attend[$i][userid]=$attend[UserId];
+          $this->attend[$i][name]=$attend[Name];
+          $this->attend[$i][type]=3;//未投稿
+          $this->attend[$i][time]=0;//未投稿
+
+            $i=$i+1;
+          }
+          foreach($this->attend as $key=>$value){
+                      $userid[$key]=$value["userid"];
+                  }
+          array_multisort($userid,SORT_ASC,$this->attend);
+
+      }
+
+      //登校日変更
+      function AttendChange($Flag,$Date,$start,$end){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+        //SchoolDayTableの変更(トゥ後尾管理)
+         $sql="update SchoolDayTable set SchoolDay=?,SchoolStartTime=unix_timestamp(?),SchoolEndTime=unix_timestamp(?) where Date=?;";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($Flag,$Date." ".$start,$Date." ".$end,$Date));
+        //休校日（ClassAttendTableから抹消）
+        if($Flag==1){
+        $sql="delete from ClassAttendTable where Date=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($Date));
+      }
+      //登校時間及び登校日の変更
+        if($Flag==0){
+          //一度その日のテーブルを削除
+          $sql="delete from ClassAttendTable where Date=?";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($Date));
+
+          //登録済みユーザーの抽出
+          $sql="select * from UserTable";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute();
+          $i=0;
+          while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+              $this->users[$i]=$user[UserId];
+                $i=$i+1;
+              }
+          //登校時間に沿ってテーブルに追加
+          for($i=0;$i<count($this->users);$i++){
+              $sql="insert into ClassAttendTable(UserId,Date,Time,Type)values(?,?,?,?)";
+              $stmt=$pdo->prepare($sql);
+              if($start<="10:10"&&$end>="10:10")$stmt->execute(array($this->users[$i],$Date,1,8));
+              if($start<="11:10"&&$end>="11:10")$stmt->execute(array($this->users[$i],$Date,2,8));
+              if($start<="12:10"&&$end>="12:10")$stmt->execute(array($this->users[$i],$Date,3,8));
+              if($start<="13:00"&&$end>="13:00")$stmt->execute(array($this->users[$i],$Date,4,8));
+              if($start<="13:50"&&$end>="13:50")$stmt->execute(array($this->users[$i],$Date,5,8));
+        }
+      }
 
 
-
+}
+}
 
 ?>

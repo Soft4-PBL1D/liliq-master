@@ -1,5 +1,5 @@
--- drop database if exists Users;
--- create database Users;
+ drop database if exists pbl;
+ create database pbl;
 use pbl;
 --
 -- データベース: `Users`
