@@ -1,7 +1,7 @@
 <?php
 require("/var/www/Function/LoginFunction/Logindb.php");
 $errorMessage=Login();
-            header_remove("Location:1.php");
+            @header_remove("Location:1.php");
 ?>
 <!DOCTYPE html>
 <html>
