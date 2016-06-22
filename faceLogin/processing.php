@@ -106,12 +106,12 @@
 				}
                       // if (data < 0.3) {
                       <?php
-                                   /*    // header("Location:1.php");
+                                       // header("Location:1.php");
                                                require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
                                                require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
                                                session_start();
                                               //  $_SESSION["USERID"]=$_SESSION["userid"];
-                                               $_SESSION["USERID"]="testman";//testdate
+                                               $_SESSION["USERID"]="0K01019";//testdate
                                                $ClassAttendDB=new ClassAttendDB();
                                                $ClassAttendDB->Attendance_Check($_SESSION["USERID"]); //test data
                                                // 当日の投稿時間の取得
@@ -134,7 +134,7 @@
                                                      }else{
                                                          echo "window.location.href = 'late2.php'";
                                                            }
-					       }*/
+					       }
                                                        ?>
 			//
       //		window.location.href = '0.php';  //遷移

@@ -3,13 +3,11 @@ require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
-$ClassAttendDB->startTime("2016-06-13");
-echo $ClassAttendDB->starttime;
 $now=$ClassAttendDB->nowY-1;
 ?>
 <html>
 <body>
-  <form method="POST" action="">
+  <form method="POST" action="test.php">
   <?php
   echo "<select name=\"YEAR\">";
 
@@ -52,6 +50,7 @@ else{
   ?>
 <input type="submit" value="送信">
 </form>
+<a href="test.php?day=1">前日</a>
 <?php
 // $ClassAttendDB=new ClassAttendDB();
 if(isset($_POST["YEAR"])){
@@ -62,49 +61,26 @@ echo $day."<br>";
 $year=$_POST["YEAR"];
 $month=$_POST["MONTH"];
 $days=$_POST["DAY"];
-$_SESSION["DATE"]=$days;
+$_SESSION["DATE"]=$day;
 }
 else {
 $_SESSION["DATE"]=date("Y-m-d");
-
 }
 if(!isset($i)){
   $i=0;
 }
-// if(!isset($cnt)){
-  // $cnt=1;
-// }
 ?>
-<!-- <form method="get" action=""> -->
-<!-- </form> -->
 <?php
-// echo $day;
-// if(isset($_POST["days"])){
-// $day1=strtotime(date("Y-m-d"));
-// $day2=strtotime($_POST["day"]);
-// echo ($day2 - $day1) / (60 * 60 * 24). '日';
-// $day=($day2 - $day1) / (60 * 60 * 24);
-// $_POST["day"]=$day;
-// }
-// if(isset($_GET["submitDay"])){
-// echo date($_GET["submitDay"])."<br>";
-// $ClassAttendDB->StundentsAttend(date($_GET["submitDay"],strtotime("-$day days")));}
-// else{
-  // echo date("Y-m-d",strtotime("+$day days"))."<br>";
-// $ClassAttendDB->StundentsAttend(date("Y-m-d",strtotime("+$day days")));
-$ClassAttendDB->StundentsAttend($day);
-
-// }
+$ClassAttendDB->StundentsAttend($_SESSION["DATE"]);
 $cnt=count($ClassAttendDB->attend);
 for($i=0;$i<$cnt;$i++){
 echo $ClassAttendDB->attend[$i][userid];
 echo $ClassAttendDB->attend[$i][name];
 if($ClassAttendDB->attend[$i][type]==0){
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}>○</a>";
-// echo date("Y/m/d H:i:s",$ClassAttendDB->attend[$i][time]);
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}>○</a>";
 }
 else
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}>✗</a>";
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}>✗</a>";
 
 echo "<br>";}
 ?>

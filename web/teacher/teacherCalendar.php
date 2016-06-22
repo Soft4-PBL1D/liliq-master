@@ -10,7 +10,7 @@ $nowY=$ClassAttendDB->nowY;
 	// $year = @$_GET['year'];
 	$month = @$_GET['month'];
 	if(!isset($month)||$month>12||$month<1){
-	$month=date("m");}
+	$month=date("n");}
 	$year=date("Y");
 	if($year!=$nowY){
 	switch($month){

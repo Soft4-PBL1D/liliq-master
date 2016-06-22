@@ -263,7 +263,7 @@ class ClassAttendDB {
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-        $sql="select c.Date,c.UserId,u.Name,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId  where c.Type in(6,7,8) and c.Date <= ?  group by UserId,Date order by Date";
+        $sql="select c.Date,c.UserId,u.Name,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId  where c.Type in(6,7,8) and c.Date <= ?  group by UserId,Date order by Date,UserId";
         $stmt=$pdo->prepare($sql);
         $i=0;
         $stmt->execute(array(date("Y-m-d")));
@@ -388,6 +388,7 @@ class ClassAttendDB {
 
       //登校日変更
       function AttendChange($Flag,$Date,$start,$end){
+        
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
@@ -430,7 +431,60 @@ class ClassAttendDB {
       }
 
 
+
 }
+  //夏休み、冬休み、春休みの設定
+  function Vacation($date1,$date2){
+      $this->construct("localhost","root","soft4","pbl");
+      $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+      PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+      //休みにする
+       $sql="update SchoolDayTable set SchoolDay=1 where Date  between ? and ?;";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($date1,$date2));
+      $sql="delete from ClassAttendTable where Date between ? and ?;";
+     $stmt=$pdo->prepare($sql);
+     $stmt->execute(array($date1,$date2));
+   }
+
+//書く授業の出席状況の表示
+   function classattend($user,$date){
+     $this->construct("localhost","root","soft4","pbl");
+     $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+     PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+      $sql="select c.Type,Name,Time from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where u.UserId=? and Date=?;";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($user,$date));
+      $this->myattend=Array();
+      $i=0;
+      while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $this->myattend[$user[Time]]=$user[Type];
+          $this->myname=$user[Name];
+          $i=$i+1;
+          }
+   }
+   //出席状況の変更
+   function classchange($user,$date,$type,$time){
+     $this->construct("localhost","root","soft4","pbl");
+     $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+     PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+      $sql="update ClassAttendTable set Type=? where Time=? and Date=? and UserId=?;";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($type,$time,$date,$user));
+   }
+   function userCheck(){
+     if(!isset($_SESSION["USERID"])){
+     header("Location:/var/www/web/Login");
+     exit;}
+     if(($_SESSION["USREID"]=="teacher")){
+       header("Location:/var/www/web/teacher");
+       exit;
+     }else{
+       header("Location:/var/www/web/students");
+       exit;}
+   }
+
 }
+
 
 ?>
