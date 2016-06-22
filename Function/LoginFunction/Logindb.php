@@ -166,11 +166,11 @@ function Login(){
         $user[3]=$kari[Name];
         session_regenerate_id(true);
         $_SESSION["USERID"] = $user[0];
+        $_SESSION["PASSWORD"]=$user[1];
         $_SESSION["TYPE"]=$user[2];
         $_SESSION["NAME"]=$user[3];
-        $_SESSION["PASSWORD"]=$user[1];
         // echo $_SESSSION["PASSWORD"];
-       if(strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"])){
+       if(SHA1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
         header("Location:password.php");
         exit;
         // echo SHA1($_SESSION["USERID"])."<br>";
@@ -182,6 +182,8 @@ function Login(){
         }
           if($_SESSION["TYPE"]=="0"&&(!strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"]))){
             // echo $user[1];
+            // echo $_SESSION["USERID"];
+            // echo $_SESSION["PASSWORD"];
             header("Location:students.php");
             exit;
           }
@@ -196,7 +198,7 @@ function Login(){
   }
     if($_POST["login"]){
       // if($_POST["password"]!=$_SESSION["PASSWORD"]||$_POST["userid"]!=$_SESSION["USERID"]){
-      $errorMessage="パスワードまたはID miss".$_POST["password"]."".$user[1];
+      $errorMessage="パスワードまたはID miss";
       if($_POST["userid"]==null||$_POST["password"]=null){
         $errorMessage="パスワードまたはIDが入力されていません";
       }
