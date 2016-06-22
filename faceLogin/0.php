@@ -17,7 +17,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
 
 <body>
   <script>
-    var ccnt = 5;
+    var ccnt = 10;
     function countdown(){
       ccnt = ccnt - 1;
       if(ccnt < 0){
