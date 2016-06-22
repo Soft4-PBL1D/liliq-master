@@ -25,11 +25,20 @@
 
           <p id="clock_txt">
 <br /><br /><br /><br /><br /><br />
-            <DIV class="bigclock_txt" style="font-size:100px;"><canvas id="face" width="180px" height="200px" style="border:1px solid #000;background:#000;"></canvas><div style="float:right;margin-top:30px;padding-right:37px;">認証しています</div></DIV>
+            <DIV class="bigclock_txt" style="font-size:70px;"><canvas id="face" width="180px" height="200px" style="border:1px solid #000;background:#000;"></canvas><div id='pname' style="float:right;margin-top:30px;padding-right:37px;">認証しています</div></DIV>
 		<div id='faceMes' style='font-color:#FF0000'>読み込み中です</div>
 <a href="0.php">0.php</a>　<a href="1.php">1.php</a>　<a href="late.php">late.php</a>
           </p>
 
+<div id='pbutton' style="margin-left:400px;">
+      <button id='yes' type="button" name="aaa" value="aaa">
+           <font style="font-size:70px;" color="#333399">はい</font>
+           </button>
+
+      <button id='no' type="button" name="aaa" value="aaa">
+                <font style="font-size:70px;" color="#333399">いいえ</font>
+                </button>
+</div>
 
 
 
@@ -49,7 +58,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
 
+		$('#pbutton').hide();
 		var localMediaStream = null;
+		var authsuc = false;
+		var timer;
 		var video = document.getElementById('camera');
 		$(document).ready(function () {
 			var hasGetUserMedia = function() {
@@ -58,7 +70,9 @@
 			};
 
 			var onFailSoHard = function(e) {
-				console.log('エラー!', e);
+				console.log('ERROR', e);
+				alert('カメラを使用できません');
+				window.location.href = '0.php';
 			};
 
 			if(!hasGetUserMedia()) {
@@ -72,8 +86,13 @@
 				}, onFailSoHard);
 			}
 		});
-		setInterval('auth()', 1000);
-		setTimeout("window.location.href = '0.php'", 10000);
+		$('#yes').click(function() {
+			window.location.href = 'students.php';
+		});
+		$('#no').click(function() {
+			location.reload();
+		});
+		timer = setInterval('auth()', 1000);
 		$('#reg').click(function() {
 			var canvas = document.getElementById('face');
 			var blob = getbase64(canvas.toDataURL());
@@ -103,9 +122,12 @@
 				processData: false,
 			}).then(function(data) {
 				if (data != 'continue') {
+					authsuc = true;
+					clearInterval(timer);
 					$('#faceMes').text('認証成功');
-					alert(data);
-					window.location.href = '1.php';
+					$('#pname').text(data + 'さんですか？');
+					$('#pbutton').show();
+					//window.location.href = 'students.php';
 				}
                       // if (data < 0.3) {
                       <?php
@@ -155,8 +177,9 @@
 		var faceHeight = 0;
 		var faceWidth = 0;
 		$(document).ready(function () {
-			if (true || localMediaStream) {
+			if (!authsuc || localMediaStream) {
 				console.log('start');
+				setTimeout("window.location.href = '0.php'", 10000);
 				var canvas = document.getElementById('overlay');
 				var ctx = canvas.getContext('2d');
 				var img = document.getElementById('img');
@@ -210,12 +233,14 @@
 					}
 					faceWidth = xMax - xMin;
 					faceHeight =  yMax - yMin;
-					if (faceHeight < 70)  {
-						$('#faceMes').text('顔を認識できません');
-					} else if (faceHeight < 150) {
-						$('#faceMes').text('顔をもっと近づけて下さい');
-					} else {
-						$('#faceMes').text('正面を向いて下さい');
+					if (!authsuc) {
+						if (faceHeight < 70)  {
+							$('#faceMes').text('顔を認識できません');
+						} else if (faceHeight < 150) {
+							$('#faceMes').text('顔をもっと近づけて下さい');
+						} else {
+							$('#faceMes').text('正面を向いて下さい');
+						}
 					}
 					cc.strokeRect(xMin, yMin, xMax - xMin, yMax - yMin);
 					cf.clearRect(0, 0, canvasInput.width, canvasInput.height);
