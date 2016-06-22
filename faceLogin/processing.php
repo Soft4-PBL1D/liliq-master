@@ -62,6 +62,7 @@
 		var localMediaStream = null;
 		var authsuc = false;
 		var timer;
+		var timerMove;
 		var video = document.getElementById('camera');
 		$(document).ready(function () {
 			var hasGetUserMedia = function() {
@@ -124,17 +125,18 @@
 				if (data != 'continue') {
 					authsuc = true;
 					clearInterval(timer);
+					clearTimeout(timerMove);
 					$('#faceMes').text('認証成功');
 					$('#pname').text(data + 'さんですか？');
 					$('#pbutton').show();
 					//window.location.href = 'students.php';
 				}
                       // if (data < 0.3) {
-                      <?php
-                                       // header("Location:1.php");
+                      //<?php
+                             /*          // header("Location:1.php");
                                                require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
                                                require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
-                                               session_start();
+                                               @session_start();
                                               //  $_SESSION["USERID"]=$_SESSION["userid"];
                                                $_SESSION["USERID"]="0K01001";//testdate
                                                $ClassAttendDB=new ClassAttendDB();
@@ -159,8 +161,8 @@
                                                      }else{
                                                          echo "window.location.href = 'late2.php'";
                                                            }
-					       }
-                                                       ?>
+			}*/
+		       //?>
 			//
       //		window.location.href = '0.php';  //遷移
 				// }
@@ -179,7 +181,7 @@
 		$(document).ready(function () {
 			if (!authsuc || localMediaStream) {
 				console.log('start');
-				setTimeout("window.location.href = '0.php'", 10000);
+				timeMove = setTimeout("window.location.href = '0.php'", 10000);
 				var canvas = document.getElementById('overlay');
 				var ctx = canvas.getContext('2d');
 				var img = document.getElementById('img');
