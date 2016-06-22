@@ -111,7 +111,6 @@ $nowY=$ClassAttendDB->nowY;
 <?php
 session_start();
 error_reporting(1);
-$_SESSION["USERID"]="0K01019";
 $ClassAttendDB->Calendar($year,$month);
 	for ($i = 0; $i < 6; $i++) {
 		echo "<div class='week'>";

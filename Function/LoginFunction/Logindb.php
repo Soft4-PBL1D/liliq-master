@@ -177,14 +177,14 @@ function Login(){
         // echo $_SESSION["PASSWORD"];
       }
         if($_SESSION["TYPE"]=="1"&&(!strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"]))){
-          header("Location:teacher.php");
+          header("Location:../teacher/teacher.php");
           exit;
         }
           if($_SESSION["TYPE"]=="0"&&(!strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"]))){
             // echo $user[1];
             // echo $_SESSION["USERID"];
             // echo $_SESSION["PASSWORD"];
-            header("Location:students.php");
+            header("Location:../students/students.php");
             exit;
           }
           // echo SHA1($_SESSION["USERID"])."<br>";
