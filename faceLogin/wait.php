@@ -22,6 +22,7 @@
           <p id="clock_txt">
             <SCRIPT type="text/javascript"><!--
             myWeek=new Array("日","月","火","水","木","金","土");
+	    myFunc();
             function myFunc(){
 
                  myDate=new Date();
