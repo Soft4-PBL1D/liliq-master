@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <title>LILIQ Develop - Waiting..</title>
 <link rel="stylesheet" type="text/css" href="screen.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -56,6 +57,12 @@
                 document.getElementById("closeup").innerHTML = ccnt;
               }
             }
+	    $('body').keydown(function(e){
+		    	if( e.keyCode == 13){
+		        	window.location.href= 'processing.php';
+				}
+	    });
+	    var code = 13; 
 
           </script>
 
