@@ -26,6 +26,7 @@
           <p id="clock_txt">
 <br /><br /><br /><br /><br /><br />
             <DIV class="bigclock_txt" style="font-size:100px;"><canvas id="face" width="180px" height="200px" style="border:1px solid #000;background:#000;"></canvas><div style="float:right;margin-top:30px;padding-right:37px;">認証しています</div></DIV>
+		<div id='faceMes' style='font-color:#FF0000'>読み込み中です</div>
 <a href="0.php">0.php</a>　<a href="1.php">1.php</a>　<a href="late.php">late.php</a>
           </p>
 
@@ -72,6 +73,7 @@
 			}
 		});
 		setInterval('auth()', 1000);
+		setTimeout("window.location.href = '0.php'", 10000);
 		$('#reg').click(function() {
 			var canvas = document.getElementById('face');
 			var blob = getbase64(canvas.toDataURL());
@@ -101,6 +103,7 @@
 				processData: false,
 			}).then(function(data) {
 				if (data != 'continue') {
+					$('#faceMes').text('認証成功');
 					alert(data);
 					window.location.href = '1.php';
 				}
@@ -207,6 +210,13 @@
 					}
 					faceWidth = xMax - xMin;
 					faceHeight =  yMax - yMin;
+					if (faceHeight < 70)  {
+						$('#faceMes').text('顔を認識できません');
+					} else if (faceHeight < 150) {
+						$('#faceMes').text('顔をもっと近づけて下さい');
+					} else {
+						$('#faceMes').text('正面を向いて下さい');
+					}
 					cc.strokeRect(xMin, yMin, xMax - xMin, yMax - yMin);
 					cf.clearRect(0, 0, canvasInput.width, canvasInput.height);
 					cf.drawImage(canvasInput, xMin, yMin, xMax - xMin, yMax - yMin, 0, 0, xMax - xMin, yMax - yMin);

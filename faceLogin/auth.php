@@ -28,10 +28,10 @@
 		$num = rtrim($num);
 #		$num = abs(1 - $num);
 		file_put_contents('au', "$file:$num\n", FILE_APPEND);
-		if ($num != '' && $num < 0.38) {
+		if ($num != '' && $num < 0.4) {
 			echo "You are $file";
 			session_start();
-			$_SESSION['userid'] = $file;
+			$_SESSION['USERID'] = $file;
 			die();
 		} else {
 		}

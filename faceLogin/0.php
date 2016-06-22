@@ -58,9 +58,9 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
           <br clear="all">
 
           <p id="name"  class="marginner"><?php echo $_SESSION["USERID"]."\n"?><?php echo $ClassAttendDB->Name;?></p>
-          <a id="select_box" href="processing.php">
+          <a id="select_box" href="login.php">
             <div id="choice_btn">
-              <p>これは私の名前ではありません(Enterでやり直し)</p>
+              <p>IDとパスワードを使って出席する</p>
             </div>
           </a>
 
