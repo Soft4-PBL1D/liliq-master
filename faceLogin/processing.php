@@ -131,12 +131,12 @@
 				}
                       // if (data < 0.3) {
                       <?php
-                                   /*    // header("Location:1.php");
+                                       // header("Location:1.php");
                                                require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
                                                require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
                                                session_start();
                                               //  $_SESSION["USERID"]=$_SESSION["userid"];
-                                               $_SESSION["USERID"]="testman";//testdate
+                                               $_SESSION["USERID"]="0K01001";//testdate
                                                $ClassAttendDB=new ClassAttendDB();
                                                $ClassAttendDB->Attendance_Check($_SESSION["USERID"]); //test data
                                                // 当日の投稿時間の取得
@@ -145,7 +145,7 @@
                                                if($ClassAttendDB->Type=="1" || $ClassAttendDB->Type==null){
                                                  //当日の登校時間までに投稿
                                                  if(date("H:i:s",$ClassAttendDB->start) >= date("H:i:s")){
-                                                     echo "window.location.href = '1.php'";
+                                                     echo "window.location.href = '2.php'";
                                                  }else{
                                                  // 遅刻理由画面パス
                                                  echo "window.location.href = 'late.php'";
@@ -159,7 +159,7 @@
                                                      }else{
                                                          echo "window.location.href = 'late2.php'";
                                                            }
-					       }*/
+					       }
                                                        ?>
 			//
       //		window.location.href = '0.php';  //遷移

@@ -7,7 +7,7 @@ function teacherCheak(){
         header("Location:login.php");
         exit;
     }else if($_SESSION["TYPE"]!="1"){
-      header("Location:students.php");
+      header("Location:../students/students.php");
       exit;
     }
 }
@@ -18,7 +18,7 @@ function studentsCheak(){
       header("Location:login.php");
       exit;
     }else if($_SESSION["TYPE"]=="1"&&$_SESSION["USERID"]!=$_SESSION["PASSWORD"]){
-      header("Location:teacher.php");
+      header("Location:../teacher/teacher.php");
       exit;
     }
 }

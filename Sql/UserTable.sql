@@ -25,13 +25,13 @@ SET time_zone = "+00:00";
 --
 -- テーブルの構造 `UserTable`
 --
-
+use pbl;
 DROP TABLE IF EXISTS `UserTable`;
 CREATE TABLE IF NOT EXISTS `UserTable` (
   `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
   `Name` varchar(50) CHARACTER SET utf32 NOT NULL COMMENT '名前',
-  `Type` int(11) NOT NULL COMMENT '教師＝１、生徒＝０',
-  `Password` varchar(100) CHARACTER SET utf32 NOT NULL COMMENT 'パスワード',
+  `type` int(11) NOT NULL COMMENT '教師＝１、生徒＝０',
+  `password` varchar(100) CHARACTER SET utf32 NOT NULL COMMENT 'パスワード',
   PRIMARY KEY (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -39,8 +39,7 @@ CREATE TABLE IF NOT EXISTS `UserTable` (
 -- テーブルのデータのダンプ `UserTable`
 --
 
-INSERT INTO `UserTable` (`UserId`, `Name`, `Type`, `Password`) VALUES
-('0K01001', 'gorira', 0, '2baae8aa5d61d9589a50e270a54363195706b8f3'),
+INSERT INTO `UserTable` (`UserId`, `Name`, `type`, `password`) VALUES
 ('test', 'testman', 0, 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

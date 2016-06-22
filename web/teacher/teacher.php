@@ -1,8 +1,8 @@
 <?php
 require("/var/www/Function/LoginFunction/LoginCheak.php");
-studentsCheak();
+teacherCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
-  header("Location:password.php");
+  header("Location:../Login/password.php");
   exit;
 }
 echo "WELCOME" . $_SESSION["NAME"]."生徒";
@@ -15,9 +15,9 @@ echo "WELCOME" . $_SESSION["NAME"]."生徒";
   </head>
   <body>
     <ul>
-      <li><a href="logout.php">Logout</a></li>
+      <li><a href="../Login/logout.php">Logout</a></li>
     </ul>
     <div>
-    <iframe width="1280" height="720" src="../students/calendar.php" scrolling="auto"></iframe></div>
+    <iframe width="1280" height="720" src="teacherCalendar.php" scrolling="auto"></iframe></div>
   </body>
 </html>
