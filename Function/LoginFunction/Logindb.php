@@ -206,5 +206,84 @@ function Login(){
     }
 }
 
+function Login_general(){
+  error_reporting(E_ALL ^ E_NOTICE);
+  session_start();
+  // errMS
+  $errorMessage = "";
+  // escappecheck
+  $viewUserId = htmlspecialchars($_POST["userid"], ENT_QUOTES);
+  // login_submit
+  //データーベースにない場合のエラーメッセージ
+      // db session
+      if($_SESSION["TYPE"]=="1"){
+        header("Location:teacher.php");
+        exit;
+      }
+      if($_SESSION["TYPE"]=="0"){
+        header("Location:students.php");
+        exit;
+      }
+    if(isset($_POST["login"])&&isset($_POST["userid"])&&isset($_POST["password"])&&$_POST["password"]!=null){
+      try{
+  $pdo=new PDO("mysql:host=localhost;dbname=pbl;charset=utf8","root","soft4",
+          array(PDO::ATTR_EMULATE_PREPARES=>false));
+        //  SHA1で暗号化したpasswordを抽出
+        // $sql="select SHA1(?)";
+        // $stmt=$pdo->prepare($sql);
+        // $stmt->execute(array($_POST['password']));
+        // if($passwd=$stmt->fetch(PDO::FETCH_ASSOC)){
+            // $sha=$passwd["password"];
+            // echo $sha;
+            // echo "aho";
+          // }
+          // 抽出したものpasswordよりselect文を実行
+        $sql="select * from UserTable where UserId=? and Password like ?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($_POST['userid'],$_POST["password"]));
+        while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
+      //    session_regenerate_id(TRUE);
+        $user[0]=$kari[UserId];
+        $user[1]=$kari[password];
+        $user[2]=$kari[type];
+        $user[3]=$kari[Name];
+        session_regenerate_id(true);
+        $_SESSION["USERID"] = $user[0];
+        $_SESSION["PASSWORD"]=$user[1];
+        $_SESSION["TYPE"]=$user[2];
+        $_SESSION["NAME"]=$user[3];
+        // echo $_SESSSION["PASSWORD"];
+       if(SHA1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+        header("Location:password.php");
+        exit;
+        // echo SHA1($_SESSION["USERID"])."<br>";
+        // echo $_SESSION["PASSWORD"];
+      }
+        if($_SESSION["TYPE"]=="1"&&(!strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"]))){
+		return false;
+        }
+          if($_SESSION["TYPE"]=="0"&&(!strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"]))){
+            // echo $user[1];
+            // echo $_SESSION["USERID"];
+            // echo $_SESSION["PASSWORD"];
+	    return true;
+          }
+          // echo SHA1($_SESSION["USERID"])."<br>";
+          // echo $_SESSION["PASSWORD"];
+      }
+      } catch (PDOException $e) {
+        exit('database session error。'.$e->getMessage());
+        $errorMessage="database error";
+      }
+    //データーベースにない場合のエラーメッセージ
+  }
+    if($_POST["login"]){
+      // if($_POST["password"]!=$_SESSION["PASSWORD"]||$_POST["userid"]!=$_SESSION["USERID"]){
+      $errorMessage="パスワードまたはID miss";
+      if($_POST["userid"]==null||$_POST["password"]=null){
+        $errorMessage="パスワードまたはIDが入力されていません";
+      }
+    }
+}
 
 ?>

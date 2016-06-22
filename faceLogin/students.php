@@ -98,7 +98,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
       <SCRIPT type="text/javascript"><!--
       setInterval( "myFunc()", 1000 );
       setInterval( "countdown()", 1000 );
-      setTimeout( "window.location.href=wait.php", 5000 );
+      setTimeout( "window.location.href = 'wait.php'", 5000 );
       // --></SCRIPT>
     </p>
   </div>
