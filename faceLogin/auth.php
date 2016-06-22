@@ -30,7 +30,7 @@
 		file_put_contents('au', "$file:$num\n", FILE_APPEND);
 		if ($num != '' && $num < 0.4) {
 			echo "$file";
-			session_start();
+			@session_start();
 			$_SESSION['USERID'] = $file;
 			die();
 		} else {
