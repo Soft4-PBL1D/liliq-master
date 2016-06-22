@@ -1,7 +1,9 @@
 <?php
 require("/var/www/Function/LoginFunction/Logindb.php");
 $errorMessage=Login();
-            @header_remove("Location:1.php");
+		if (@$_POST['userid'] && $errorMessage == '') {
+	    	header("Location: 1.php", true, 303);
+		}
 ?>
 <!DOCTYPE html>
 <html>
