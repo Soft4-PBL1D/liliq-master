@@ -87,6 +87,11 @@
 				}, onFailSoHard);
 			}
 		});
+		$('body').keydown(function(e){
+			if(authsuc && e.keyCode == 13){
+				window.location.href= 'students.php';
+			}
+		});
 		$('#yes').click(function() {
 			window.location.href = 'students.php';
 		});

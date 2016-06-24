@@ -14,6 +14,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
 <meta charset="utf-8" />
 <title>LILIQ Develop - Waiting..</title>
 <link rel="stylesheet" type="text/css" href="screen.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -81,6 +82,11 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
   <div id="status_box">
     <p id="clock_txt">
       <SCRIPT type="text/javascript"><!--
+	    $('body').keydown(function(e){
+		    if(e.keyCode == 13){
+			    window.location.href= 'wait.php';
+		    }
+	    });
       myWeek=new Array("日","月","火","水","木","金","土");
       function myFunc(){
            myDate=new Date();
