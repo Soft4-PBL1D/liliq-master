@@ -81,6 +81,6 @@ echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION
 }
 else
 echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}>✗</a>";
-
-echo "<br>";}
+echo "<br>";
+}
 ?>

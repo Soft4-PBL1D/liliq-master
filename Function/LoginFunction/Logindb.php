@@ -6,6 +6,10 @@
   $password=$_SESSION["PASSWORD"];
   $userid=$_SESSION["USERID"];
    $pass=$_POST["password"];
+   if(!isset($_SESSION["USERID"])){
+     header("Location:login.php");
+     exit;
+   }
   //  echo $password."<br>".$userid;
   //  パスワードを変更済みなら以降変更不可
    if($password!=SHA1($userid)){
@@ -14,13 +18,13 @@
      //  if(strstr($password,$pass)){
     //  Jamp();
      if($_SESSION["TYPE"]==1):
-       header("Location:teacher.php");
+       header("Location:../teacher/teacher.php");
        exit;
    endif;
       if($_SESSION["TYPE"]==0):
         // echo "2";
         // echo $userid;
-      header("Location:students.php");
+      header("Location:../students/students.php");
       exit;
     endif;
    }
@@ -83,11 +87,11 @@
       // return $message;
       if($_SESSION["TYPE"]==1):
         echo "パスワードを変更しました\n";
-      header("Location:teacher.php");
+      header("Location:../teacher/teacher.php");
     endif;
       if($_SESSION["TYPE"]==0):
         echo "パスワードを変更しました\n";
-        header("Location:students.php");
+        header("Location:../students/students.php");
 
       endif;
     }else
@@ -134,11 +138,11 @@ function Login(){
   //データーベースにない場合のエラーメッセージ
       // db session
       if($_SESSION["TYPE"]=="1"){
-        header("Location:teacher.php");
+        header("Location:../teacher/teacher.php");
         exit;
       }
       if($_SESSION["TYPE"]=="0"){
-        header("Location:students.php");
+        header("Location:../students/students.php");
         exit;
       }
     if(isset($_POST["login"])&&isset($_POST["userid"])&&isset($_POST["password"])&&$_POST["password"]!=null){

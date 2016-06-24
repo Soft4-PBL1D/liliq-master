@@ -388,7 +388,7 @@ class ClassAttendDB {
 
       //登校日変更
       function AttendChange($Flag,$Date,$start,$end){
-        
+
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
@@ -452,7 +452,7 @@ class ClassAttendDB {
      $this->construct("localhost","root","soft4","pbl");
      $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
      PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-      $sql="select c.Type,Name,Time from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where u.UserId=? and Date=?;";
+      $sql="select c.Type,Name,Time,u.UserId from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where u.UserId=? and Date=?;";
       $stmt=$pdo->prepare($sql);
       $stmt->execute(array($user,$date));
       $this->myattend=Array();
@@ -460,6 +460,8 @@ class ClassAttendDB {
       while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
           $this->myattend[$user[Time]]=$user[Type];
           $this->myname=$user[Name];
+          $this->myid=$user[UserId];
+
           $i=$i+1;
           }
    }

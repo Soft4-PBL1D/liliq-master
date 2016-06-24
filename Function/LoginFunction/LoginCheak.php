@@ -27,13 +27,13 @@ function Jamp(){
     session_start();
     //login->OK = main jamp
     if($_SESSION["TYPE"]==0){
-      header("Refresh:3,URL:students.php");
+      header("Refresh:3,URL:../students/students.php");
     // header("Location:students.php");
     exit;
   }
     if($_SESSION["TYPE"]==1){
         // header("Location:teacher.php");
-        header("Refresh:3,URL:teacher.php");
+        header("Refresh:3,URL:../teacher/teacher.php");
     exit;
   // }else{
     // header("Refresh:3,URL:index.php");

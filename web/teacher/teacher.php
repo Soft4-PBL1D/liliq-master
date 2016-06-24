@@ -18,6 +18,6 @@ echo "WELCOME" . $_SESSION["NAME"]."生徒";
       <li><a href="../Login/logout.php">Logout</a></li>
     </ul>
     <div>
-    <iframe width="1280" height="720" src="teacherCalendar.php" scrolling="auto"></iframe></div>
+    <iframe width="1280" height="720" src="teacherCalendar.php" scrolling="auto" frameborder="0"></iframe></div>
   </body>
 </html>
