@@ -29,8 +29,8 @@
 #		$num = abs(1 - $num);
 		file_put_contents('au', "$file:$num\n", FILE_APPEND);
 		if ($num != '' && $num < 0.4) {
-			echo "You are $file";
-			session_start();
+			echo "$file";
+			@session_start();
 			$_SESSION['USERID'] = $file;
 			die();
 		} else {

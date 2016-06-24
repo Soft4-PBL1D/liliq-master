@@ -14,6 +14,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
 <meta charset="utf-8" />
 <title>LILIQ Develop - Waiting..</title>
 <link rel="stylesheet" type="text/css" href="screen.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -65,9 +66,9 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
           <br clear="all">
 
           <p id="name"  class="marginner"><?php echo $_SESSION["USERID"]."\n"?><?php echo $ClassAttendDB->Name;?></p>
-          <a id="select_box" href="processing.php">
+          <a id="select_box" href="wait.php">
             <div id="choice_btn">
-              <p>これは私の名前ではありません(Enterでやり直し)</p>
+              <p>閉じる</p>
             </div>
           </a>
 
@@ -81,6 +82,11 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
   <div id="status_box">
     <p id="clock_txt">
       <SCRIPT type="text/javascript"><!--
+	    $('body').keydown(function(e){
+		    if(e.keyCode == 13){
+			    window.location.href= 'wait.php';
+		    }
+	    });
       myWeek=new Array("日","月","火","水","木","金","土");
       function myFunc(){
            myDate=new Date();
@@ -98,6 +104,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
       <SCRIPT type="text/javascript"><!--
       setInterval( "myFunc()", 1000 );
       setInterval( "countdown()", 1000 );
+      setTimeout( "window.location.href = 'wait.php'", 5000 );
       // --></SCRIPT>
     </p>
   </div>

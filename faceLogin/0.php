@@ -17,7 +17,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
 
 <body>
   <script>
-    var ccnt = 5;
+    var ccnt = 10;
     function countdown(){
       ccnt = ccnt - 1;
       if(ccnt < 0){
@@ -44,7 +44,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
               <div style="color:#fff;float:right;width:500px;margin-top:90px;">
 
                 <span id="closeup" class="closer">
-                  5
+                  10
                 </span>
                 <span class="closer2">
                   秒後にクローズ
@@ -91,6 +91,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
       <SCRIPT type="text/javascript"><!--
       setInterval( "myFunc()", 1000 );
       setInterval( "countdown()", 1000 );
+      setTimeout( "window.location.href = 'wait.php'", 10000 );
       // --></SCRIPT>
     </p>
   </div>

@@ -1,0 +1,51 @@
+﻿/* html,bodyタグの設定 */
+html, body{
+    margin: 0;      /* 余白の削除 */
+    padding: 0;     /* 余白の削除 */
+	height: 100%;   /* 縦の表示領域を100% */
+	width: 100%;    /* 横の表示領域を100% */
+}
+/* iconの共通CSS */
+.icon{
+    display:inline-block; 
+    position:relative;
+	height:25px;
+
+}
+
+.icon:hover{
+    opacity: 0.8;
+}
+
+/* 丸 */
+.icon3:after{
+    content:'';
+    display:block;
+    position:absolute;
+    top:5px;
+    left:5px;
+    border-radius:10px;
+    height:8px;
+    width:8px;
+    border:6px solid #000;
+}
+/* バツ */
+.icon4:before, .icon4:after{
+    content:'';
+    display:block;
+    position:absolute;
+    top:6px;
+    left:11px;
+    height:19px;
+    width:7px;
+    background:#000;
+    border-radius:10px;
+    transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+    -o-transform:rotate(-45deg);
+}
+.icon4:after{
+    transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+}
