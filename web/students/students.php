@@ -21,7 +21,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
   <div class="iti">
     <div class="logo"></div>
     <div class="btnrighter">
-      <a href="../login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+      <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
       <a href="#" class="btns_hvr-fade"><span>設定</span></a>
     </div>
   </div>
