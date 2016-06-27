@@ -263,7 +263,7 @@ class ClassAttendDB {
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-        $sql="select c.Date,c.UserId,u.Name,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId  where c.Type in(6,7,8) and c.Date <= ?  group by UserId,Date order by Date,UserId";
+        $sql="select c.Date,c.UserId,u.Name,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId  where c.Type in(6,7,8,10,11,12,13,14,15) and c.Date <= ?  group by UserId,Date order by Date,UserId";
         $stmt=$pdo->prepare($sql);
         $i=0;
         $stmt->execute(array(date("Y-m-d")));

@@ -51,15 +51,15 @@
         return $message;
       endif;
   // type check
-    if($userid=="teacher"){
-      $type=1;
-    }else{
-      $type=0;
-    }
+    // if($userid=="teacher"){
+    //   $type=1;
+    // }else{
+    //   $type=0;
+    // }
     try{
   $pdo=new PDO("mysql:host=localhost;dbname=pbl;charset=utf8","root","soft4",
         array(PDO::ATTR_EMULATE_PREPARES=>false));
-      $sql="update UserTable set UserId=?,Password=SHA1(?),Type=? where userId=?;";
+      $sql="update UserTable set UserId=?,password=SHA1(?) where userId=?;";
       // no SHA
       // $sql="update UserTable set UserId=?,Password=?,Type=? where userId=?;";
       $stmt=$pdo->prepare($sql);
@@ -71,12 +71,10 @@
       while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
         $user[0]=$kari[UserId];
         $user[1]=$kari[Password];
-        $user[2]=$kari[Type];
         $user[3]=$kari[Name];
         // session_destroy();
         // session_regenerate_id(TRUE);
         $_SESSION["USERID"] = $user[0];
-        $_SESSION["TYPE"]=$user[2];
         $_SESSION["NAME"]=$user[3];
         $_SESSION["PASSWORD"]=$user[1];
       }

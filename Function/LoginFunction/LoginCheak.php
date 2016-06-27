@@ -4,7 +4,7 @@ function teacherCheak(){
   session_start();
   // login_check teacherONLY
     if (!isset($_SESSION["USERID"])){
-        header("Location:login.php");
+        header("Location:../Login/login.php");
         exit;
     }else if($_SESSION["TYPE"]!="1"){
       header("Location:../students/students.php");
