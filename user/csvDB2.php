@@ -8,8 +8,8 @@
 <p><?php
 
 if (is_uploaded_file($_FILES["upfile"]["tmp_name"])) {
-  if (move_uploaded_file($_FILES["upfile"]["tmp_name"], "/user/" . $_FILES["upfile"]["name"])) {
-    chmod("files/" . $_FILES["upfile"]["name"], 0644);
+  if (move_uploaded_file($_FILES["upfile"]["tmp_name"], "/var/www/user/" . $_FILES["upfile"]["name"])) {
+    chmod("files/" . $_FILES["upfile"]["name"], 0777);
     echo $_FILES["upfile"]["name"] . "をアップロードしました。";
   } else {
     echo "ファイルをアップロードできません。";
@@ -33,9 +33,9 @@ $file->setFlags(SplFileObject::READ_CSV);
 foreach ($file as $data) {
 $x++;
 
-define('DB_DATABASE','UserTable');
+define('DB_DATABASE','pbl');
 define('DB_USERNAME','root');
-define('DB_PASSWORD','aisakasayolp');
+define('DB_PASSWORD','soft4');
 define('PDO_DSN','mysql:dbhost=localhost;dbname=' . DB_DATABASE);
 
 

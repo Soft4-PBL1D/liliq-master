@@ -244,7 +244,7 @@ function Login_general(){
           // 抽出したものpasswordよりselect文を実行
         $sql="select * from UserTable where UserId=? and Password like ?";
         $stmt=$pdo->prepare($sql);
-        $stmt->execute(array($_POST['userid'],$_POST["password"]));
+        $stmt->execute(array($_POST['userid'],sha1($_POST["password"])));
         while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
       //    session_regenerate_id(TRUE);
         $user[0]=$kari[UserId];
