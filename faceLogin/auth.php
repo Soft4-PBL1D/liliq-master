@@ -1,4 +1,6 @@
 <?php
+	require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+	$ClassAttendDB= new ClassAttendDB();
 	file_put_contents('au', "===========\n", FILE_APPEND);
 	$fp = fopen('/tmp/futa.lock', 'r');
         if (flock($fp, LOCK_EX | LOCK_NB) == FALSE) {
@@ -29,7 +31,8 @@
 #		$num = abs(1 - $num);
 		file_put_contents('au', "$file:$num\n", FILE_APPEND);
 		if ($num != '' && $num < 0.4) {
-			echo "$file";
+			$ClassAttendDB->NameSelect($file);
+			echo $ClassAttendDB->Name;
 			@session_start();
 			$_SESSION['USERID'] = $file;
 			die();

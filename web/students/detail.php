@@ -3,6 +3,7 @@
 <title></title>
 </head>
 <body>
+  <a href="calendar.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
 <?php
 error_reporting(0);
 session_start();
@@ -29,9 +30,15 @@ if(!isset($ClassAttendDB->myname)){
 exit;
 }
 ?>
+<<<<<<< HEAD
 <form method="get" action="">
 <?php echo $ClassAttendDB->myname."さん<br>";
 $genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理","","出席申請中","遅刻申請中","欠席 申請中","就活申請中","病欠申請中","公欠申請中"];
+=======
+<form method="get" action=""><h3 style="font-size:20px;">
+<?php echo $ClassAttendDB->myname."さん<br></h3>";
+$genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理"];
+>>>>>>> 1d4b2a245d97bc612860bedfb6589d7414a8509c
 echo $_GET["date"]."の出席状況<br>";
 for($i=1;$i<=5;$i++){
   if($ClassAttendDB->myattend[$i]!=null){

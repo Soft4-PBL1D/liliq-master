@@ -30,6 +30,10 @@
   //  }
   //パスワード変更ボタンを押されたら実行
   if(isset($_POST["passcheck"])){
+    if($_SESSION["USERID"]==$pass){
+      $message.="<br>パスワード６文字以上10文字以下を入力してください<br>";
+      return $message;
+    }
     if(($pass!=null)&&!strstr($password,$userid)){
     // if(($pass!=null)&&($userid==$password)){
     // passcheck

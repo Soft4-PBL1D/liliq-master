@@ -11,9 +11,9 @@ Logout();
   <body>
   <div><?php echo $errorMessage; ?></div>
   <ul>
-    <li>Back to LoginPage</li>
+    <li>ログアウトしています</li>
   </ul>
   <?php
-  header("Refresh:2;URL=login.php");?>
+  header("location:login.php");?>
   </body>
 </html>

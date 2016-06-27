@@ -17,7 +17,6 @@
     <div class="logo"></div>
     <div class="btnrighter">
       <a href="logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
-      <a href="#" class="btns_hvr-fade"><span>設定</span></a>
     </div>
   </div>
 </div>
@@ -57,7 +56,7 @@
 
 
   <div class="wn">
-    <div class="note">
+    <div class="note" style="text-align:center;">
       &copy; 2016 Dfun.
     </div>
   </div>

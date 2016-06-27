@@ -1,13 +1,23 @@
 span.day {
 	display: inline-block;
-	width: 150;
-	height: 100;
+	width: 150px;
+	height: 100px;
 	border-width: thin;
 	border-style: solid;
+	border-color: #000;
 	position: relative;
 }
+span.day:hover {
+	background-color:#ccc;
+}
+span.date:hover {
+	background-color:#444;
+}
 span.date {
-	height: 30;
+	height: 30px;
+	text-align:center;
+	background-color:#444;
+	color:#fff;
 }
 span.text {
 	position: absolute;
@@ -23,8 +33,19 @@ span.holid {
 	color: #555;
 	border-color: #000;
 }
+span.holid:hover {
+	background-color: #DDD;
+}
 span.attend {
 	background-color: white;
 	color: #000;
 	border-color: #000;
+}
+#caldiv {
+	width:1100px;
+	margin-left:38px;
+}
+.calendar_hr{
+	text-align:left;
+	width:1090px;
 }
