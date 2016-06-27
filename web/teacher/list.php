@@ -50,8 +50,8 @@ $now=$ClassAttendDB->nowY-1;
 	<div class="iti">
 	<div class="logo"></div>
 	<div class="btnrighter">
-		<a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
-		<a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+		<a href="../Login/logout.php" target="_top" class="btn_hvr-fade"><span>ログアウト</span></a>
+		<a href="../Login/password.php" target="_top" class="btns_hvr-fade"><span>パスワード変更</span></a>
 	</div><!-- btnrighter -->
 	</div><!-- logo -->
 	</div><!-- iti -->
