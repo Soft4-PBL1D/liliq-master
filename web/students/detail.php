@@ -14,7 +14,10 @@ if(!isset($ClassAttendDB->myname)){
   if($_GET["submit"]){
     echo $_SESSION["USERID"];
     echo $_GET["date1"];
-    $ClassAttendDB->AttendChangeApplication($_GET["type1"],1,$_GET["date1"],$_SESSION["UERID"]);
+    for($i=1;$i<=5;$i++){
+    if($_GET["type$i"]!=null){
+    $ClassAttendDB->AttendChangeApplication($_GET["type$i"],$i,$_GET["date1"],$_SESSION["USERID"]);}
+  }
     echo "申請しました";
     echo "<a href=calendar.php>modoru</a>";
   }
@@ -28,38 +31,37 @@ exit;
 ?>
 <form method="get" action="">
 <?php echo $ClassAttendDB->myname."さん<br>";
-$genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理"];
+$genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理","","出席申請中","遅刻申請中","欠席 申請中","就活申請中","病欠申請中","公欠申請中"];
 echo $_GET["date"]."の出席状況<br>";
 for($i=1;$i<=5;$i++){
   if($ClassAttendDB->myattend[$i]!=null){
 echo "{$i}時限：".$genre[$ClassAttendDB->myattend[$i]]."\n";
-
-echo "<input type='radio' name='type$i' value=0";
+echo "<input type='radio' name='type$i' value=10";
 if($ClassAttendDB->myattend[$i]==0)
 echo " checked>出席";
 else
 echo ">出席";
-echo "<input type='radio' name='type$i' value=1";
+echo "<input type='radio' name='type$i' value=11";
 if($ClassAttendDB->myattend[$i]==1)
 echo " checked>遅刻";
 else
 echo ">遅刻";
-echo "<input type='radio' name='type$i' value=2";
+echo "<input type='radio' name='type$i' value=12";
 if($ClassAttendDB->myattend[$i]==2)
 echo " checked>欠席";
 else
 echo ">欠席";
-echo "<input type='radio' name='type$i' value=3";
+echo "<input type='radio' name='type$i' value=13";
 if($ClassAttendDB->myattend[$i]==3)
 echo " checked>就活";
 else
 echo ">就活";
-echo "<input type='radio' name='type$i' value=4";
+echo "<input type='radio' name='type$i' value=14";
 if($ClassAttendDB->myattend[$i]==4)
 echo " checked>病欠";
 else
 echo ">病欠";
-echo "<input type='radio' name='type$i' value=5";
+echo "<input type='radio' name='type$i' value=15";
 if($ClassAttendDB->myattend[$i]==5)
 echo " checked>公欠";
 else

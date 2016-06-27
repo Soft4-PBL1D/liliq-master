@@ -7,10 +7,13 @@
 <?php
 error_reporting(0);
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+$genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理","","出席変更依頼がきました","遅刻変更依頼がきました","欠席変更依頼がきました",
+"就活変更依頼がきました","病欠変更依頼がきました","公欠変更依頼がきました"];
 $Cl = new ClassAttendDB();
-$Cl->TeacherCheck();
+$Cl->AttendChangeCheck();
 $cnt=count($Cl->userid);
-for($i=0;$i<$cnt;$i++){
+// echo $cnt;
+/*for($i=0;$i<$cnt;$i++){
   if(date("14:50:00")<date("H:i:s")){
   echo $Cl->userdate[$i]."\n\n\n";
   echo $Cl->userid[$i]."::";
@@ -23,23 +26,18 @@ for($i=0;$i<$cnt;$i++){
     <br>
 <?php }
   }
-  else if($Cl->usertype[$i]==7){
+  */
+  //遅延、就活でのちコクの許可、出席状況の変更依頼
+    for($i=0;$i<$cnt;$i++){
     echo $Cl->userdate[$i]."\n\n\n";
-    echo $Cl->userid[$i]."::";
-    echo $Cl->username[$i]."さん";?>
-    就活登録申請があります
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=3";?>">認可</a>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=2";?>">拒否</a>
-    <br>
+    // echo $Cl->userid[$i]."::";
+    echo $Cl->username[$i]."さん";
+    echo $Cl->usertime[$i]."限目";
+    echo $genre[$Cl->usertype[$i]];
+    echo "<a href='AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&i=0';?>認可</a>";
+    echo "<a href='AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&i=1';?>拒否</a>";
+  echo "<br>";
+}
+    ?>
     <?php
-  }else if($Cl->usertype[$i]==6){
-    echo $Cl->userdate[$i]."\n\n\n";
-    echo $Cl->userid[$i]."::";
-    echo $Cl->username[$i]."さん";?>
-    遅延登録申請があります
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=1";?>">認可</a>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=2";?>">拒否</a>
-    <br>
-<?php  }
-  }
 ?>

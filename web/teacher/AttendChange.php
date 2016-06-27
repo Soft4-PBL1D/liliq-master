@@ -4,4 +4,5 @@ require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $Cl=new ClassAttendDB();
 $Cl->TacherChange($_GET["Id"],$_GET["Type"],$_GET["i"],$_GET["Date"]);
 header("Location:AttendCheck.php");
+// echo $_GET["Id"].$_GET["Type"].$_GET["i"].$_GET["Date"];
 ?>

@@ -257,15 +257,48 @@ class ClassAttendDB {
           $stmt=$pdo->prepare($sql);
           $stmt->execute(array($Type,$Time,$Date,$UserId));
       }
+      //出席変更依頼をおくる
       function AttendChangeApplication($Type,$Time,$Date,$UserId){
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-        $sql="update ClassAttendTable set Type=? where Time=? and Date=? and UserId=?";
+        $sql="insert  into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
         $stmt=$pdo->prepare($sql);
-        $stmt->execute(array($Type,$Time,$Date,$UserId));
+        $stmt->execute(array($UserId,$Date,$Time,$Type));
       }
 
+
+      function AttendChangeCheck(){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+        //遅延、就活の認可
+      $sql="select Date,u.UserId,Name,Time,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where Date<=? and c.Type in(?,?);";
+          $stmt=$pdo->prepare($sql);
+          $i=0;
+          $stmt->execute(array(date("Y-m-d")));
+          while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $this->userdate[$i]=$kari[Date];
+            $this->userid[$i]=$kari[UserId];
+            $this->username[$i]=$kari[Name];
+            $this->usertype[$i]=$kari[Type];
+            $this->usertime[$i]=$kari[Time];
+            $i=$i+1;
+          }
+          // /変更依頼
+        $sql="select ut.UserId,ut.Name,Date,ua.Time,ua.Type from UserApplication as ua join UserTable as ut on ua.UserId=ut.UserId";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute();
+        while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
+        $this->userdate[$i]=$kari[Date];
+          $this->userid[$i]=$kari[UserId];
+          $this->username[$i]=$kari[Name];
+          $this->usertype[$i]=$kari[Type];
+          $this->usertime[$i]=$kari[Time];
+          $this->userid[$i];
+          $i=$i+1;
+        }
+}
       //当日までの登校していない生徒の抽出毎日１5時以降のみ
       function TeacherCheck(){
         $this->construct("localhost","root","soft4","pbl");
@@ -276,10 +309,10 @@ class ClassAttendDB {
         $i=0;
         $stmt->execute(array(date("Y-m-d")));
         while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
-        $this->userdate[$i]=$kari[Date];
-          $this->userid[$i]=$kari[UserId];
-          $this->username[$i]=$kari[Name];
-          $this->usertype[$i]=$kari[Type];
+        $this->userdate1[$i]=$kari[Date];
+          $this->userid1[$i]=$kari[UserId];
+          $this->username1[$i]=$kari[Name];
+          $this->usertype1[$i]=$kari[Type];
           $i=$i+1;
         }
       }
@@ -303,6 +336,11 @@ class ClassAttendDB {
             $stmt=$pdo->prepare($sql);
             $stmt->execute(array($ChangeType,$UserId,8,$Date));
           }
+      else if($NowType==10||$NowType==11||$NowType==12||$NowType==13||$NowType==14||$NowType==15){
+              $sql="update ClassAttendTable set Type=? where UserId=? and Type=? and Date=?";
+              $stmt=$pdo->prepare($sql);
+              $stmt->execute(array($ChangeType,$UserId,$NowType,$Date));
+            }
       }
 
       function Calendar($Year,$Month){
