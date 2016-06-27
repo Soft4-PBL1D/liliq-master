@@ -63,12 +63,14 @@ $nowY=$ClassAttendDB->nowY;
 
 <html>
 	<head>
+
 		<meta charset="utf-8">
 		<link rel='stylesheet' href='cstyle.css'>
 	</head>
 
 	<body>
 
+		<div id="caldiv">
 	<h2 class='title'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
@@ -105,7 +107,7 @@ $nowY=$ClassAttendDB->nowY;
 </FORM>
 </h2>
 </h2>
-	<hr class='calendar_hr'>
+
 
 	<span class='day date'>日</span><span class='day date'>月</span><span class='day date'>火</span><span class='day date'>水</span><span class='day date'>木</span><span class='day date'>金</span><span class='day date'>土</span>
 <?php
@@ -161,6 +163,7 @@ $ClassAttendDB->Calendar($year,$month);
     echo "</div>";
 	}
 ?>
+</div>
 	</body>
 
 </html>

@@ -22,7 +22,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
     <div class="logo"></div>
     <div class="btnrighter">
       <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
-      <a href="#" class="btns_hvr-fade"><span>設定</span></a>
+      <a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
     </div>
   </div>
 </div>
@@ -44,7 +44,16 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
       <div>
       <iframe width="1180" height="720" src="calendar.php" scrolling="auto" frameborder="0"></iframe></div>
     </div>
+
   </div>
+
+
+  <div class="wn">
+
+    <div class="note">
+      &copy; Dfun.
+  </div>
+
 
   </body>
 </html>
