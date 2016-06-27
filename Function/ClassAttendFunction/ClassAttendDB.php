@@ -257,6 +257,14 @@ class ClassAttendDB {
           $stmt=$pdo->prepare($sql);
           $stmt->execute(array($Type,$Time,$Date,$UserId));
       }
+      function AttendChangeApplication($Type,$Time,$Date,$UserId){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+        $sql="update ClassAttendTable set Type=? where Time=? and Date=? and UserId=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($Type,$Time,$Date,$UserId));
+      }
 
       //当日までの登校していない生徒の抽出毎日１5時以降のみ
       function TeacherCheck(){

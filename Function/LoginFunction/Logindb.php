@@ -12,22 +12,22 @@
    }
   //  echo $password."<br>".$userid;
   //  パスワードを変更済みなら以降変更不可
-   if($password!=SHA1($userid)){
+  //  if($password!=SHA1($userid)){
     //  echo $password."<br>".sha1($userid);
      //no SHA1
      //  if(strstr($password,$pass)){
     //  Jamp();
-     if($_SESSION["TYPE"]==1):
-       header("Location:../teacher/teacher.php");
-       exit;
-   endif;
-      if($_SESSION["TYPE"]==0):
+    //  if($_SESSION["TYPE"]==1):
+      //  header("Location:../teacher/teacher.php");
+      //  exit;
+  //  endif;
+      // if($_SESSION["TYPE"]==0):
         // echo "2";
         // echo $userid;
-      header("Location:../students/students.php");
-      exit;
-    endif;
-   }
+      // header("Location:../students/students.php");
+      // exit;
+      //  endif;
+  //  }
   //パスワード変更ボタンを押されたら実行
   if(isset($_POST["passcheck"])){
     if(($pass!=null)&&!strstr($password,$userid)){
@@ -59,11 +59,11 @@
     try{
   $pdo=new PDO("mysql:host=localhost;dbname=pbl;charset=utf8","root","soft4",
         array(PDO::ATTR_EMULATE_PREPARES=>false));
-      $sql="update UserTable set UserId=?,password=SHA1(?) where userId=?;";
+      $sql="update UserTable set password=SHA1(?) where userId=?;";
       // no SHA
       // $sql="update UserTable set UserId=?,Password=?,Type=? where userId=?;";
       $stmt=$pdo->prepare($sql);
-      $stmt->execute(array($userid,$pass,$type,$userid));
+      $stmt->execute(array($pass,$userid));
       // $stmt->execute(array($userid,$pass,$type,$userid));
       $sql="select * from UserTable where userId=?";
       $stmt=$pdo->prepare($sql);
