@@ -70,7 +70,7 @@ $nowY=$ClassAttendDB->nowY;
 
 	<body>
 
-		<div id="caldiv">
+
 	<h2 class='title'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
@@ -108,7 +108,7 @@ $nowY=$ClassAttendDB->nowY;
 </h2>
 </h2>
 
-
+<div id="caldiv">
 	<span class='day date'>日</span><span class='day date'>月</span><span class='day date'>火</span><span class='day date'>水</span><span class='day date'>木</span><span class='day date'>金</span><span class='day date'>土</span>
 <?php
 session_start();
