@@ -37,7 +37,7 @@
         <form method="post" action="">
           <!-- パスワードを変更したらテキストフィールドを 隠し指定時間後トップ画面に繊維 -->
           <?php
-            if(strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"])){?>
+            // if(strstr(SHA1($_SESSION["USERID"]),$_SESSION["PASSWORD"])){?>
 
 
               <input type="password" placeholder="パスワードを入力してください" name="password"><br>
@@ -47,7 +47,7 @@
 
 
           <?php
-          }
+          // }
               echo $comment;
          ?>
     </div>

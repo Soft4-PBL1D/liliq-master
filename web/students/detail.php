@@ -12,8 +12,11 @@ $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->classattend($_SESSION["USERID"],$_GET["date"]);
 if(!isset($ClassAttendDB->myname)){
   if($_GET["submit"]){
+    echo $_SESSION["USERID"];
+    echo $_GET["date1"];
+    $ClassAttendDB->AttendChangeApplication($_GET["type1"],1,$_GET["date1"],$_SESSION["UERID"]);
     echo "申請しました";
-    echo "<a href=detail.php>modoru</a>";
+    echo "<a href=calendar.php>modoru</a>";
   }
   else{
     echo "休校日";
@@ -62,6 +65,7 @@ echo " checked>公欠";
 else
 echo ">公欠";
 echo "<br>";
+echo "<input type=hidden name='date1' value={$_GET["date"]}>";
 }
 else
 echo "{$i}時限：おやすみ<br>";
