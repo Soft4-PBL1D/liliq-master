@@ -15,8 +15,11 @@ if(!isset($ClassAttendDB->myname)){
     echo "申請しました";
     echo "<a href=detail.php>modoru</a>";
   }
-  else
+  else{
     echo "休校日";
+	echo $_SESSION["USERID"];
+	echo $_GET["date"];
+}
 exit;
 }
 ?>
