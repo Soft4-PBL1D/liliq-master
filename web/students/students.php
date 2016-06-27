@@ -5,19 +5,46 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
   header("Location:../Login/password.php");
   exit;
 }
-echo "WELCOME" . $_SESSION["NAME"]."生徒";
+//echo "WELCOME" . $_SESSION["NAME"]."生徒";
 ?>
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>TOPPAGE</title>
-  </head>
-  <body>
-    <ul>
-      <li><a href="../Login/logout.php">Logout</a></li>
-    </ul>
-    <div>
-    <iframe width="1280" height="720" src="calendar.php" scrolling="auto" frameborder="0"></iframe></div>
+
+
+<head>
+  <meta charset="utf-8">
+  <title>ログイン</title>
+  <link rel="stylesheet" type="text/css" href="as.css">
+</head>
+<body>
+
+<div id="header">
+  <div class="iti">
+    <div class="logo"></div>
+    <div class="btnrighter">
+      <a href="../login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+      <a href="#" class="btns_hvr-fade"><span>設定</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="seet">
+  <div class="seetco">
+    <h2><?php echo $_SESSION["NAME"]; ?></h2>
+    <p><?php echo $_SESSION["USERID"]; ?></p>
+  </div>
+</div>
+
+<div class="page">
+<div class="coram">
+
+
+  <div class="wn">
+
+    <div class="note">
+      <div>
+      <iframe width="1180" height="720" src="calendar.php" scrolling="auto" frameborder="0"></iframe></div>
+    </div>
+  </div>
+
   </body>
 </html>

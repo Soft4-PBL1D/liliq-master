@@ -2,6 +2,10 @@
 error_reporting(0);
 require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+session_start();
+header('Expires:-1');
+header('Cache-Control:');
+header('Pragma:');
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
 session_start();
