@@ -5,19 +5,17 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
   header("Location:../Login/password.php");
   exit;
 }
-echo "WELCOME" . $_SESSION["NAME"]."生徒";
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>TOPPAGE</title>
+    <style>
+      *{margin:0;padding:0;}
+    </style>
   </head>
-  <body>
-    <ul>
-      <li><a href="../Login/logout.php">Logout</a></li>
-    </ul>
-    <div>
-    <iframe width="1280" height="720" src="teacherCalendar.php" scrolling="auto" frameborder="0"></iframe></div>
+  <body style="min-height:100%;">
+<iframe width="100%" height="1400px" src="list.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
   </body>
 </html>
