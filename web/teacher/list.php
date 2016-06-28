@@ -13,6 +13,7 @@ header('Expires:-1');
 header('Cache-Control:');
 header('Pragma:');
 $now=$ClassAttendDB->nowY-1;
+$ClassAttendDB->popup();
 ?>
 
 <!DOCTYPE html>
@@ -30,17 +31,19 @@ $now=$ClassAttendDB->nowY-1;
 		<script type="text/javascript" src="js/pnotify.custom.min.js"></script>
 		<link href="css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 	<!-- 通知の動いてる部分 -->
+	<?php if($ClassAttendDB->countA!=0) {?>
 		<script type="text/javascript">
 			Flg = 1;
 			$(function(){
 				if(Flg == 1){
 					new PNotify({
 					title: '通知',
-					text: '通知××件'
+					text: '通知<?php echo $ClassAttendDB->countA;?>件'
 				});
         	}
 		});
 		</script>
+		<?php } ?>
 		<style>
 		.belll{
 		  width:35px;

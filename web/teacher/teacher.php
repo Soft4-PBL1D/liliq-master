@@ -1,24 +1,211 @@
 <?php
+error_reporting(0);
+require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
+require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+session_start();
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 teacherCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
   header("Location:../Login/password.php");
   exit;
 }
+header('Expires:-1');
+header('Cache-Control:');
+header('Pragma:');
+$ClassAttendDB = new ClassAttendDB();
+$ClassAttendDB->nowYear();
+session_start();
+header('Expires:-1');
+header('Cache-Control:');
+header('Pragma:');
+$now=$ClassAttendDB->nowY-1;
+$ClassAttendDB->popup();
 ?>
+
 <!DOCTYPE html>
-<html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>TOPPAGE</title>
-    <style>
-      *{margin:0;padding:0;}
-    </style>
-  </head>
-  <body>
+<head>
 
-<iframe width="100%" height="1100px" src="list.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
+<meta charset="utf-8">
+<title>教員トップページ</title>
+	<!-- 各種読み込み -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/kawanishi.css">
+		<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<!-- 通知関係 -->
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/pnotify.custom.min.js"></script>
+		<link href="css/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
+	<!-- 通知の動いてる部分 -->
+	<?php if($ClassAttendDB->countA!=0) {?>
+		<script type="text/javascript">
+			Flg = 1;
+			$(function(){
+				if(Flg == 1){
+					new PNotify({
+					title: '通知',
+					text: '通知<?php echo $ClassAttendDB->countA;?>件'
+				});
+        	}
+		});
+		</script>
+		<?php } ?>
+		<style>
+		.belll{
+		  width:35px;
+		  height:35px;
+		  background-image:url("bell.png");
+		  background-size:contain;
+			position:center;
+		  float:right;
+			margin-top:-55px;
+			margin-right:20px;
+			padding:7px;
+			display:block;
+		}
+		.belll:hover{
+		  opacity:0.5;
+		}
+		</style>
+</head>
+<!-- head終わり -->
 
-  </body>
+<body>
+
+<div id="header">
+	<div class="iti">
+	<div class="logo"></div>
+	<div class="btnrighter">
+		<a href="../Login/logout.php" target="_top" class="btn_hvr-fade"><span>ログアウト</span></a>
+		<a href="../Login/password.php" target="_top" class="btns_hvr-fade"><span>パスワード変更</span></a>
+	</div><!-- btnrighter -->
+	</div><!-- logo -->
+	</div><!-- iti -->
+</div><!-- header -->
+<!-- body内のheader終了 -->
+
+
+<div class="seet">
+  <div class="seetco">
+    <h2>教員用ページ</h2>
+    <p>teacherリストページ</p>
+		<a href="AttendCheck.php" class="belll">　</a>
+  </div><!-- seetco -->
+</div><!-- seet -->
+
+<div class="page">
+<div class="coram">
+
+	<div class="wn">
+	<div class="note">
+		<div class="title">
+			<p><strong>学生リスト</strong></p>
+		</div><!-- title -->
+
+	<div class="wn2">
+	<div class="list">
+
+
+  <form method="POST" action="list.php">
+  <?php
+  echo "<select name=\"YEAR\">";
+
+  // for ($i = 0; $i < 2; $i++) {
+      echo "<option>".$now;
+      echo "<option>".$ClassAttendDB->nowY;
+
+  // }
+  echo "</select>年";
+
+  echo "<select name=\"MONTH\">";
+
+  for ($i = 3; $i < 15; $i++) {
+    if(date("m")==$i+1){
+    if($i<=12)
+    echo "<option selected>".date("m", 2678400 * $i);
+    else
+    echo "<option selected>".date("m", 2678400 * ($i-12));
+}
+else{
+  if($i<=12)
+  echo "<option>".date("m", 2678400 * $i);
+  else
+  echo "<option>".date("m", 2678400 * ($i-12));
+}
+}
+
+  echo "</select>月";
+
+  echo "<select name=\"DAY\">";
+
+  for ($i = 0; $i < 31; $i++) {
+    if(date("d")==$i+1)
+    echo "<option selected>".date("d", 86400 * $i);
+      else
+      echo "<option>".date("d", 86400 * $i);
+  }
+  echo "</select>日";
+
+  ?>
+<input type="submit" value="送信">
+</form>
+<?php
+// $ClassAttendDB=new ClassAttendDB();
+if(isset($_POST["YEAR"])){
+$day=$_POST["YEAR"]."-";
+$day.=$_POST["MONTH"]."-";
+$day.=$_POST["DAY"];
+echo $day."<br>";
+$year=$_POST["YEAR"];
+$month=$_POST["MONTH"];
+$days=$_POST["DAY"];
+$_SESSION["DATE"]=$day;
+}
+else {
+$_SESSION["DATE"]=date("Y-m-d");
+}
+if(!isset($i)){
+  $i=0;
+}
+?>
+
+
+<?php
+$ClassAttendDB->StundentsAttend($_SESSION["DATE"]);
+$cnt=count($ClassAttendDB->attend);
+for($i=0;$i<$cnt;$i++){
+echo $ClassAttendDB->attend[$i][userid];
+echo $ClassAttendDB->attend[$i][name];
+if($ClassAttendDB->attend[$i][type]==0){
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon3'></span></a>";
+}
+else
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
+echo "<br>";
+}
+?>
+
+	</div><!-- list -->
+	</div><!-- wn2 -->
+	</div><!-- note -->
+	</div><!-- wn -->
+
+	<div class="wn">
+	<div class="note">
+		<iframe width="1100px" height="720px" src="teacherCalendar.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
+	</div><!-- note -->
+	</div><!-- wn -->
+
+
+	<div class="wn">
+	<div class="note">
+		&copy; 2016 Dfun.
+	</div><!-- note -->
+	</div><!-- wn -->
+
+
+</div><!-- coram -->
+</div><!-- page -->
+
+</body>
 </html>

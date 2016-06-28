@@ -31,7 +31,8 @@ exit;
 }
 ?>
 <form method="get" action="">
-<?php echo $ClassAttendDB->myname."さん<br>";
+<?php
+// echo $ClassAttendDB->myname."さん<br>";
 $genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待ち","就活認証待ち","登下校未処理","","出席申請中","遅刻申請中","欠席 申請中","就活申請中","病欠申請中","公欠申請中"];
 ?>
 <form method="get" action=""><h3 style="font-size:20px;">
@@ -39,6 +40,7 @@ $genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待�
 echo $_GET["date"]."の出席状況<br>";
 for($i=1;$i<=5;$i++){
 if($ClassAttendDB->myattend[$i]!=null){
+  echo $ClassAttendDB->myattend2[0];
 if(isset($ClassAttendDB->myattend2[$i]))
 echo "{$i}時限：".$genre[$ClassAttendDB->myattend2[$i]]."\n";
 else

@@ -1,4 +1,5 @@
 <?php
+// classattend
 class ClassAttendDB {
       function construct($host,$user,$pass,$db){
 	      $this->host = $host;
@@ -12,6 +13,29 @@ class ClassAttendDB {
         $this->fourgen=date("13:00:00");//4time
         $this->fifgen=date("14:00:00");//5time
         // 出席：0遅刻：1欠席：2就活：3病欠：4公欠：5
+        }
+        function popup(){
+          $this->construct("localhost","root","soft4","pbl");
+          $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+          PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+          //申請があれば申請中にするため
+           //ClassAttendTableの出席状況
+          $sql="select count(*) from ClassAttendTable where Type in(6,7);";
+           $stmt=$pdo->prepare($sql);
+           $stmt->execute();
+           $this->myattend=Array();
+           $i=0;
+           while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+               $this->count=$user["count(*)"];
+             }
+             $sql2="select count(*) from UserApplication;";
+             $stmt2=$pdo->prepare($sql2);
+             $stmt2->execute();
+             $i=0;
+             while($user2=$stmt2->fetch(PDO::FETCH_ASSOC)){
+                 $this->count2=$user2["count(*)"];
+               }
+               $this->countA=$this->count+$this->count2;
         }
         function NameSelect($UserId){
           error_reporting(E_ALL ^ E_NOTICE);
@@ -360,11 +384,6 @@ class ClassAttendDB {
           $this->userid[$i];
           $i=$i+1;
         }
-        foreach($this->userid as $key=>$value){
-                    $userid[$key]=$value["userid"];
-                }
-        array_multisort($userid,SORT_ASC,$this->attend);
-
 }
       //当日までの登校していない生徒の抽出毎日１5時以降のみ
       function TeacherCheck(){
@@ -580,9 +599,11 @@ class ClassAttendDB {
           $this->myid=$user[UserId];
           $i=$i+1;
         }
-        $sql2="select * from UserApplication where UserId='0K01001' and Date='2016-06-15'";
+        $sql2="select * from UserApplication where UserId=? and Date=?";
         $stmt2=$pdo->prepare($sql2);
-        $stmt2->execute(array($user,$date));
+        // $stmt2->execute(array("0K01001","2016-06-15"));
+        $stmt2->execute(array($_SESSION["USERID"],$date));
+
         $i=0;
         while($user2=$stmt2->fetch(PDO::FETCH_ASSOC)){
             $this->myattend2[$user2[Time]]=$user2[Type];
