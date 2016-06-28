@@ -87,7 +87,7 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
            document.getElementById("myIDdate").innerHTML = myMsg;
       }
       // --></SCRIPT>
-      <DIV id="myIDdate" class="clock_txt">0月00日(　)00時00分00秒</DIV>
+      <div id="myIDdate" class="clock_txt">0月00日(　)00時00分00秒</div>
       <SCRIPT type="text/javascript"><!--
       setInterval( "myFunc()", 1000 );
       setInterval( "countdown()", 1000 );

@@ -27,11 +27,13 @@ require("/var/www/Function/LoginFunction/Logindb.php");
   <br><br>
 <input type="password" id="password" name="password" style="margin-left:48px;" placeholder=" パスワード" value="">
   <br>
-  <input type="submit" id="login" name="login" value="Login" style="margin-left:48px;margin-top:60px;width:303px;height:40px;border:1px solid #ccc;">
+<div class="btncover">
+  <input type="submit" id="login" name="login" value="ログイン" class="hvr-fade" >
+</div>
   <!-- </fieldset> -->
   </form>
 
-    <div style="color:#f00;margin-left:48px;margin-top:20px;"></div>
+    <div style="color:#f00;width:300px;margin:0 auto;margin-top:30px;text-align:center;"><?php echo $errorMessage ?></div>
 </div></div>
 
 

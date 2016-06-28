@@ -27,17 +27,16 @@
 <br /><br /><br /><br /><br /><br />
             <DIV class="bigclock_txt" style="font-size:70px;"><canvas id="face" width="180px" height="200px" style="border:1px solid #000;background:#000;"></canvas><div id='pname' style="float:right;margin-top:30px;padding-right:37px;">認証しています</div></DIV>
 		<div id='faceMes' style='font-color:#FF0000'>読み込み中です</div>
-<a href="0.php">0.php</a>　<a href="1.php">1.php</a>　<a href="late.php">late.php</a>
           </p>
 
 <div id='pbutton' style="margin-left:400px;">
       <button id='yes' type="button" name="aaa" value="aaa">
-           <font style="font-size:70px;" color="#333399">はい</font>
-           </button>
+           <font style="width:200px;font-size:70px;" color="#333399">はい</font>
+      </button>
 
       <button id='no' type="button" name="aaa" value="aaa">
                 <font style="font-size:70px;" color="#333399">いいえ</font>
-                </button>
+      </button>
 </div>
 
 

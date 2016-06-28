@@ -56,12 +56,14 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
           }
 
           </script>
-          <span id="closeup" class="closer">
-            5
-          </span>
-          <span class="closer">
-            秒後にクローズ
-          </span>
+          <div style="padding-top:100px;">
+            <span id="closeup" class="closer">
+              5
+            </span>
+            <span class="closer">
+              秒後にクローズ
+            </span>
+          </div>
         </div>
           <br clear="all">
 
