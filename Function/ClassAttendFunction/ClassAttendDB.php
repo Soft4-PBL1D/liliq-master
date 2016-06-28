@@ -12,7 +12,6 @@ class ClassAttendDB {
         $this->fourgen=date("13:00:00");//4time
         $this->fifgen=date("14:00:00");//5time
         // 出席：0遅刻：1欠席：2就活：3病欠：4公欠：5
-
         }
         function NameSelect($UserId){
           error_reporting(E_ALL ^ E_NOTICE);
@@ -317,32 +316,34 @@ class ClassAttendDB {
         }
       }
       //認可、または拒否
-      function TacherChange($UserId,$NowType,$ChangeType,$Date){
+      function TacherChange($UserId,$NowType,$ChangeType,$Date,$Time){
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-        if($NowType==6){
-        $sql="update ClassAttendTable set Type=? where UserId=? and Type=? and Date=?";
+        // $ChangeType==0は認可、1は拒否
+        // 出席：0// 遅刻：1// 欠席：2// 就活：3// 病欠：4// 公欠：5// 遅刻申請：６// 就活申請：７
+        // 登校前：８// 出席にかえろ：１０// 遅刻にかえろ：１１// 欠席にかえろ：１２// 就活かえろ：１３// 病欠かえろ：１４// 公欠かえろ：１５
+        if($ChangeType==0){
+          echo $UserId."<br>";
+          echo $NowType."<br>";
+          echo $ChangeType."<br>";
+          echo $Date."<br>";
+          echo $Time."<br>";
+          if($NowType==6) $sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
+          if($NowType==7) $sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
+          if($NowType==10)$sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
+          if($NowType==11)$sql="update ClassAttendTable set Type=1 where UserId=? and Date=? and Time=?";
+          if($NowType==12)$sql="update ClassAttendTable set Type=2 where UserId=? and Date=? and Time=?";
+          if($NowType==13)$sql="update ClassAttendTable set Type=3 where UserId=? and Date=? and Time=?";
+          if($NowType==14)$sql="update ClassAttendTable set Type=4 where UserId=? and Date=? and Time=?";
+          if($NowType==15)$sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($UserId,$Date,$Time));
+        }
+        $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
         $stmt=$pdo->prepare($sql);
-        $stmt->execute(array($ChangeType,$UserId,6,$Date));
-      }
-      else if($NowType==7){
-            $sql="update ClassAttendTable set Type=? where UserId=? and Type=? and Date=?";
-            $stmt=$pdo->prepare($sql);
-            $stmt->execute(array($ChangeType,$UserId,7,$Date));
-            }
-        else if($NowType==8){
-            $sql="update ClassAttendTable set Type=? where UserId=? and Type=? and Date=?";
-            $stmt=$pdo->prepare($sql);
-            $stmt->execute(array($ChangeType,$UserId,8,$Date));
-          }
-      else if($NowType==10||$NowType==11||$NowType==12||$NowType==13||$NowType==14||$NowType==15){
-              $sql="update ClassAttendTable set Type=? where UserId=? and Type=? and Date=?";
-              $stmt=$pdo->prepare($sql);
-              $stmt->execute(array($ChangeType,$UserId,$NowType,$Date));
-            }
-      }
-
+        $stmt->execute(array($UserId,$Date,$Time));
+        }
       function Calendar($Year,$Month){
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
@@ -498,6 +499,8 @@ class ClassAttendDB {
      $this->construct("localhost","root","soft4","pbl");
      $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
      PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+     //申請があれば
+      $sql="select * from UserApplication where UserId=? and Date=?";
       $sql="select c.Type,Name,Time,u.UserId from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where u.UserId=? and Date=?;";
       $stmt=$pdo->prepare($sql);
       $stmt->execute(array($user,$date));
