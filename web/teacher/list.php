@@ -41,6 +41,23 @@ $now=$ClassAttendDB->nowY-1;
         	}
 		});
 		</script>
+		<style>
+		.belll{
+		  width:35px;
+		  height:35px;
+		  background-image:url("bell.png");
+		  background-size:contain;
+			position:center;
+		  float:right;
+			margin-top:-55px;
+			margin-right:20px;
+			padding:7px;
+			display:block;
+		}
+		.belll:hover{
+		  opacity:0.5;
+		}
+		</style>
 </head>
 <!-- head終わり -->
 
@@ -63,6 +80,7 @@ $now=$ClassAttendDB->nowY-1;
   <div class="seetco">
     <h2>教員用ページ</h2>
     <p>teacherリストページ</p>
+		<a href="AttendCheck.php" class="belll">　</a>
   </div><!-- seetco -->
 </div><!-- seet -->
 
