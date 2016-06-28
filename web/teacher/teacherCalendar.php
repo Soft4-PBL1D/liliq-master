@@ -84,7 +84,7 @@ $nowY=$ClassAttendDB->nowY;
 	<?php }else{?>
 		<a href="teacherCalendar.php?month=<?php echo $month-1?>"> < </a>
 		<?php } ?>
-<h2>月の指定：
+<h3>月の指定：
 <form method="GET" action="teacherCalendar.php">
 <SELECT name="month">
 <OPTION value="4">4</OPTION>
@@ -102,7 +102,7 @@ $nowY=$ClassAttendDB->nowY;
 </SELECT>
 <input type="submit" value="送信">
 </FORM>
-</h2>
+</h3>
 </h2>
 	<hr class='calendar_hr'>
 

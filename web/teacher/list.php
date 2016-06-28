@@ -165,9 +165,18 @@ echo "<br>";
 
 	<div class="wn">
 	<div class="note">
+		<iframe width="1100px" height="720px" src="teacherCalendar.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
+	</div><!-- note -->
+	</div><!-- wn -->
+
+
+	<div class="wn">
+	<div class="note">
 		&copy; 2016 Dfun.
 	</div><!-- note -->
 	</div><!-- wn -->
+
+
 </div><!-- coram -->
 </div><!-- page -->
 
