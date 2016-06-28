@@ -8,6 +8,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 ?>
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8">
     <title>TOPPAGE</title>
@@ -15,7 +16,9 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
       *{margin:0;padding:0;}
     </style>
   </head>
-  <body style="min-height:100%;">
-<iframe width="100%" height="1400px" src="list.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
+  <body>
+
+<iframe width="100%" height="1100px" src="list.php" scrolling="auto" frameborder="0" style="min-height:100%;" ></iframe>
+
   </body>
 </html>

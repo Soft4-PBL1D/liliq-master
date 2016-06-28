@@ -6,7 +6,13 @@ body {background:#EBF3F7;}
 font-family: 'mf';
 src: url('VL-PGothic-Regular.ttf') format('truetype');
 }
-
+.belll{
+  width:80px;
+  height:80px;
+  background-image:url("bell.png");
+  background-size:contain;
+  float:right;
+}
 #box {
       background:rgba(0,0,0,0.7);
       height:500px;
