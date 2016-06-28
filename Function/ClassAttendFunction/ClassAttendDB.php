@@ -340,7 +340,7 @@ class ClassAttendDB {
           $i=0;
           $stmt->execute(array(date("Y-m-d")));
           while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
-          $this->userdate[$i]=$kari[Date];
+            $this->userdate[$i]=$kari[Date];
             $this->userid[$i]=$kari[UserId];
             $this->username[$i]=$kari[Name];
             $this->usertype[$i]=$kari[Type];
@@ -348,11 +348,11 @@ class ClassAttendDB {
             $i=$i+1;
           }
           // /変更依頼
-        $sql="select ut.UserId,ut.Name,Date,ua.Time,ua.Type from UserApplication as ua join UserTable as ut on ua.UserId=ut.UserId group by ua.Time";
+        $sql="select ut.UserId,ut.Name,Date,ua.Time,ua.Type from UserApplication as ua join UserTable as ut on ua.UserId=ut.UserId";
         $stmt=$pdo->prepare($sql);
         $stmt->execute();
         while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
-        $this->userdate[$i]=$kari[Date];
+          $this->userdate[$i]=$kari[Date];
           $this->userid[$i]=$kari[UserId];
           $this->username[$i]=$kari[Name];
           $this->usertype[$i]=$kari[Type];
@@ -360,6 +360,11 @@ class ClassAttendDB {
           $this->userid[$i];
           $i=$i+1;
         }
+        foreach($this->userid as $key=>$value){
+                    $userid[$key]=$value["userid"];
+                }
+        array_multisort($userid,SORT_ASC,$this->attend);
+
 }
       //当日までの登校していない生徒の抽出毎日１5時以降のみ
       function TeacherCheck(){
@@ -562,8 +567,8 @@ class ClassAttendDB {
      $this->construct("localhost","root","soft4","pbl");
      $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
      PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-     //申請があれば
-      $sql="select * from UserApplication where UserId=? and Date=?";
+     //申請があれば申請中にするため
+      //ClassAttendTableの出席状況
       $sql="select c.Type,Name,Time,u.UserId from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where u.UserId=? and Date=?;";
       $stmt=$pdo->prepare($sql);
       $stmt->execute(array($user,$date));
@@ -573,8 +578,16 @@ class ClassAttendDB {
           $this->myattend[$user[Time]]=$user[Type];
           $this->myname=$user[Name];
           $this->myid=$user[UserId];
-
           $i=$i+1;
+        }
+        $sql2="select * from UserApplication where UserId='0K01001' and Date='2016-06-15'";
+        $stmt2=$pdo->prepare($sql2);
+        $stmt2->execute(array($user,$date));
+        $i=0;
+        while($user2=$stmt2->fetch(PDO::FETCH_ASSOC)){
+            $this->myattend2[$user2[Time]]=$user2[Type];
+            $this->myid2=$user2[UserId];
+            // $i=$i+1;
           }
    }
    //出席状況の変更
