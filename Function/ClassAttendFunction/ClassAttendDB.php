@@ -261,10 +261,73 @@ class ClassAttendDB {
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
-        $sql="insert  into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+        $sql="select * from ClassAttendTable where UserId=? and Date=? and Time=?";
+        $i=1;
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time));
+        while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $type1=$kari[Type];
+
+        }
+        //チェックボックスに変動がない場合は処理しない
+        if($type1==8){
+        $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time));
+        $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time,$Type));}
+        if($type1==0 && $Type!=10){
+        $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time));
+        $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
         $stmt=$pdo->prepare($sql);
         $stmt->execute(array($UserId,$Date,$Time,$Type));
       }
+      if($type1==1 && $Type!=11){
+      $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($UserId,$Date,$Time));
+      $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($UserId,$Date,$Time,$Type));
+    }
+     if($type1==2 && $Type!=12){
+            $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+            $stmt=$pdo->prepare($sql);
+            $stmt->execute(array($UserId,$Date,$Time));
+            $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+            $stmt=$pdo->prepare($sql);
+            $stmt->execute(array($UserId,$Date,$Time,$Type));
+          }
+      if($type1==3 && $Type!=13){
+        $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time));
+        $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time,$Type));
+                }
+      if($type1==4 && $Type!=14){
+        $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time));
+        $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($UserId,$Date,$Time,$Type));
+                      }
+        if($type1==5 && $Type!=15){
+          $sql="delete from UserApplication where UserId=? and Date=? and Time=?";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($UserId,$Date,$Time));
+          $sql="insert into UserApplication(UserId,Date,Time,Type)values(?,?,?,?)";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($UserId,$Date,$Time,$Type));
+        }
+
+        }
+
 
 
       function AttendChangeCheck(){
@@ -285,7 +348,7 @@ class ClassAttendDB {
             $i=$i+1;
           }
           // /変更依頼
-        $sql="select ut.UserId,ut.Name,Date,ua.Time,ua.Type from UserApplication as ua join UserTable as ut on ua.UserId=ut.UserId";
+        $sql="select ut.UserId,ut.Name,Date,ua.Time,ua.Type from UserApplication as ua join UserTable as ut on ua.UserId=ut.UserId group by ua.Time";
         $stmt=$pdo->prepare($sql);
         $stmt->execute();
         while($kari=$stmt->fetch(PDO::FETCH_ASSOC)){

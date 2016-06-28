@@ -20,7 +20,6 @@ if(!isset($ClassAttendDB->myname)){
     $ClassAttendDB->AttendChangeApplication($_GET["type$i"],$i,$_GET["date1"],$_SESSION["USERID"]);}
   }
     echo "申請しました";
-    echo "<a href=calendar.php>modoru</a>";
   }
   else{
     echo "休校日";
