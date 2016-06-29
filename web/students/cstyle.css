@@ -7,6 +7,12 @@ span.day {
 	border-color: #000;
 	position: relative;
 }
+span.day font {
+	display:block;
+	position:absolute;
+	bottom:5px;
+	left:5px;
+}
 span.day:hover {
 	background-color:#ccc;
 }
