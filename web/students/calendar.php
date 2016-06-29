@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 studentsCheak();
