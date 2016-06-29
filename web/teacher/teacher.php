@@ -52,8 +52,8 @@ $ClassAttendDB->popup();
 		<?php } ?>
 		<style>
 		.belll{
-		  width:35px;
-		  height:35px;
+		  width:30px;
+		  height:30px;
 		  background-image:url("bell.png");
 		  background-size:contain;
 			position:center;
@@ -62,6 +62,7 @@ $ClassAttendDB->popup();
 			margin-right:20px;
 			padding:7px;
 			display:block;
+      text-decoration:none;
 		}
 		.belll:hover{
 		  opacity:0.5;
@@ -76,8 +77,8 @@ $ClassAttendDB->popup();
 	<div class="iti">
 	<div class="logo"></div>
 	<div class="btnrighter">
-		<a href="../Login/logout.php" target="_top" class="btn_hvr-fade"><span>ログアウト</span></a>
-		<a href="../Login/password.php" target="_top" class="btns_hvr-fade"><span>パスワード変更</span></a>
+		<a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+		<a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
 	</div><!-- btnrighter -->
 	</div><!-- logo -->
 	</div><!-- iti -->

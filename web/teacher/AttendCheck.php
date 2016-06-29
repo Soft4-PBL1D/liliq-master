@@ -1,10 +1,43 @@
 <!doctype html>
-<?php error_reporting(0);?>
+<?php error_reporting(0);
+session_start();
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+teacherCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}?>
 <html lang=en>
 <head>
-<meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>ログイン　|　LILIQ</title>
+  <link rel="stylesheet" type="text/css" href="../students/as.css">
 </head>
 <body>
+  <div id="header">
+    <div class="iti">
+      <div class="logo"></div>
+      <div class="btnrighter">
+        <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+        <a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seet">
+    <div class="seetco">
+      <h2><?php echo $_SESSION["NAME"]; ?></h2>
+      <p><?php echo $_SESSION["USERID"]; ?></p>
+    </div>
+  </div>
+
+  <div class="page">
+  <div class="coram">
+
+
+    <div class="wn">
+
+      <div class="note">
 <?php
 // error_reporting(0);
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
@@ -34,11 +67,17 @@ $cnt=count($Cl->userid);
     echo $Cl->username[$i]."さん";
     echo $Cl->usertime[$i]."限目";
     echo $genre[$Cl->usertype[$i]];?>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=0';?>">認可</a>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=1';?>">拒否</a>
+    //認可ボタン　０認証　１拒否
+    <a id="btn_n" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=0';?>">認可</a>
+    <a id="btn_t" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=1';?>">拒否</a>
   <?php
   echo "<br>";
 }
     ?>
     <?php
 ?>
+
+</div>
+</div>
+</body>
+</html>
