@@ -3,6 +3,14 @@ require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
 $nowY=$ClassAttendDB->nowY;
+$ClassAttendDB->myname($_GET["id"]);
+session_start();
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+teacherCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}
 
 //登校日、または休校日変更
 
@@ -69,23 +77,23 @@ $nowY=$ClassAttendDB->nowY;
 	</head>
 
 	<body>
-
-
+		<!-- //生徒名の表示 -->
+		<?php echo $ClassAttendDB->myname;?>
 	<h2 class='title'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
-		<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
-		<a href="calendar.php?month=1"> > </a>
-		<?php }else if($month==1){?>
-			<a href="studentsCalendar.php?month=12"> < </a>
-			<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
+		<a href='studentsCalendar.php?month=<?php echo $month-1?>&id=<?php echo $_GET["id"]?>'> < </a>
+		<a href='studentsCalendar.php?month=1&id=$_GET['id']'> > </a>
+		<?php }else if($moh==1){?>
+			<a href='studentsCalendar.php?month=12&id=$_GET['id']'> < </a>
+			<a href='studentsCalendar.php?month=<?php echo $month+1?>&id=<?php echo $_GET["id"]?>'> > </a>
 			<?php }else if($month==4){?>
-				<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href='studentsCalendar.php?month=<?php echo $month+1?>&id=<?php echo $_GET["id"]?>'> > </a>
 			<?php }else if($month!=3){?>
-				<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
-				<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href='studentsCalendar.php?month=<?php echo $month-1?>&id=<?php echo $_GET["id"]?>'>< </a>
+				<a href='studentsCalendar.php?month=<?php echo $month+1?>&id=<?php echo $_GET["id"]?>'>>  </a>
 	<?php }else{?>
-		<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
+		<a href='studentsCalendar.php?month=<?php echo $month-1?>&id=<?php echo $_GET["id"]?>'>< </a>
 		<?php } ?>
 <h2>月の指定：
 <form method="GET" action="">
@@ -103,6 +111,7 @@ $nowY=$ClassAttendDB->nowY;
 <OPTION value="2">2</OPTION>
 <OPTION value="3">3</OPTION>
 </SELECT>
+<input type="hidden" name="id" value="<?php echo $_GET["id"]?>">
 <input type="submit" value="送信">
 </FORM>
 </h2>
