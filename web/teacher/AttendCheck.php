@@ -9,9 +9,35 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 }?>
 <html lang=en>
 <head>
-<meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>ログイン　|　LILIQ</title>
+  <link rel="stylesheet" type="text/css" href="../students/as.css">
 </head>
 <body>
+  <div id="header">
+    <div class="iti">
+      <div class="logo"></div>
+      <div class="btnrighter">
+        <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+        <a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="seet">
+    <div class="seetco">
+      <h2><?php echo $_SESSION["NAME"]; ?></h2>
+      <p><?php echo $_SESSION["USERID"]; ?></p>
+    </div>
+  </div>
+
+  <div class="page">
+  <div class="coram">
+
+
+    <div class="wn">
+
+      <div class="note">
 <?php
 // error_reporting(0);
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
@@ -49,3 +75,8 @@ $cnt=count($Cl->userid);
     ?>
     <?php
 ?>
+
+</div>
+</div>
+</body>
+</html>

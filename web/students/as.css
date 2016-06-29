@@ -22,6 +22,20 @@ body {background:#EBF3F7;}
       border-radius:3px;
     }
 
+#btn_k {
+  background:#f00;
+  width:100px;
+  height:30px;
+  line-height:2em;
+  display:block;
+}
+#btn_n {
+  background:#f0f;
+  width:100px;
+  height:30px;
+  line-height:2em;
+  display:block;
+}
 
 .seet {
   background:#7E8C98;
