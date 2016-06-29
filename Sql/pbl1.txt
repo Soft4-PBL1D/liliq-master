@@ -1,0 +1,181 @@
+-- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: pbl
+-- ------------------------------------------------------
+-- Server version	5.5.49-0+deb8u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `ClassAttendTable`
+--
+
+DROP TABLE IF EXISTS `ClassAttendTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ClassAttendTable` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Date` date DEFAULT NULL COMMENT '出席日',
+  `Time` int(16) DEFAULT NULL COMMENT '時限目（１〜５）',
+  `Type` int(11) NOT NULL DEFAULT '8',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=72210 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ClassAttendTable`
+--
+
+LOCK TABLES `ClassAttendTable` WRITE;
+/*!40000 ALTER TABLE `ClassAttendTable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ClassAttendTable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FaceTable`
+--
+
+DROP TABLE IF EXISTS `FaceTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `FaceTable` (
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `imagePath` varchar(256) DEFAULT NULL COMMENT '顔面パス',
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FaceTable`
+--
+
+LOCK TABLES `FaceTable` WRITE;
+/*!40000 ALTER TABLE `FaceTable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `FaceTable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SchoolAttendTable`
+--
+
+DROP TABLE IF EXISTS `SchoolAttendTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SchoolAttendTable` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Time` int(16) NOT NULL COMMENT '登下校時間（unixTime）',
+  `Type` int(2) NOT NULL COMMENT '教師＝１、生徒＝０',
+  `Checking` int(2) NOT NULL COMMENT '０＝登校、１＝下校、２＝異常下校',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SchoolAttendTable`
+--
+
+LOCK TABLES `SchoolAttendTable` WRITE;
+/*!40000 ALTER TABLE `SchoolAttendTable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `SchoolAttendTable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SchoolDayTable`
+--
+
+DROP TABLE IF EXISTS `SchoolDayTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SchoolDayTable` (
+  `ident` int(11) NOT NULL AUTO_INCREMENT,
+  `Date` date NOT NULL COMMENT '20**-**-**',
+  `Week` int(11) NOT NULL COMMENT '曜日（0~6））',
+  `SchoolDay` int(11) NOT NULL COMMENT '休校or登校日',
+  `SchoolStartTime` int(11) NOT NULL COMMENT '登校時間',
+  `SchoolEndTime` int(11) NOT NULL COMMENT '下校時間',
+  PRIMARY KEY (`ident`)
+) ENGINE=InnoDB AUTO_INCREMENT=1826 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SchoolDayTable`
+--
+
+LOCK TABLES `SchoolDayTable` WRITE;
+/*!40000 ALTER TABLE `SchoolDayTable` DISABLE KEYS */;
+/*!40000 ALTER TABLE `SchoolDayTable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `UserApplication`
+--
+
+DROP TABLE IF EXISTS `UserApplication`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserApplication` (
+  `ident` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` varchar(15) NOT NULL,
+  `Date` date DEFAULT NULL,
+  `Time` int(11) NOT NULL,
+  `Type` int(11) NOT NULL,
+  PRIMARY KEY (`ident`)
+) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `UserApplication`
+--
+
+LOCK TABLES `UserApplication` WRITE;
+/*!40000 ALTER TABLE `UserApplication` DISABLE KEYS */;
+/*!40000 ALTER TABLE `UserApplication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `UserTable`
+--
+
+DROP TABLE IF EXISTS `UserTable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UserTable` (
+  `UserId` varchar(10) NOT NULL COMMENT 'ユーザーID',
+  `Name` varchar(50) CHARACTER SET utf32 NOT NULL COMMENT '名前',
+  `type` int(11) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `UserTable`
+--
+
+LOCK TABLES `UserTable` WRITE;
+/*!40000 ALTER TABLE `UserTable` DISABLE KEYS */;
+INSERT INTO `UserTable` VALUES ('0K01001','秋月',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01002','芥川　周平',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01003','円佛　直也',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01004','古曵　昌俊',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01005','佐々木　涼太',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01006','多田　涼太',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01007','土田　昇平',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01008','寺口　悟司',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01009','土居　幸太郎',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01010','栂野　仁志',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01011','土肥　侑平',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01012','長谷川　遼',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01013','藤井　貴之',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01014','前田　貴大',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01015','増澤　優駿',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01016','松本　祐樹',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01017','村井　亮哉',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01018','森本　大佑',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01019','山口　大貴',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01020','山中　竣介',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01021','吉田　朋広',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('0K01022','川西　望未',0,'356a192b7913b04c54574d18c28d46e6395428ab'),('teacher','ティーチャー',1,'356a192b7913b04c54574d18c28d46e6395428ab');
+/*!40000 ALTER TABLE `UserTable` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-06-29 16:07:20
