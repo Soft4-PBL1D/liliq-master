@@ -14,6 +14,32 @@ class ClassAttendDB {
         $this->fifgen=date("14:00:00");//5time
         // 出席：0遅刻：1欠席：2就活：3病欠：4公欠：5
         }
+        function gotime($date){
+          $this->construct("localhost","root","soft4","pbl");
+          $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+          PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+          $i=0;
+          // school login time
+          $sql="select * from SchoolAttendTable where from_unixtime(Time) like ? and Type=? and UserId=?;";
+          $stmt=$pdo->prepare($sql);
+          $date=date("Y-m-d",strtotime($date));
+          // echo $date;
+          $stmt->execute(array($date."%",0,$_SESSION["USERID"]));
+          while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+              $this->schoolLogin=$user[Time];
+              $i=1;
+            }
+            if($i==0)$this->schoolLogin=null;
+          $sql="select * from SchoolAttendTable where from_unixtime(Time) like ? and Type=? and UserId=?;";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($date."%",1,$_SESSION["USERID"]));
+          while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $this->schoolEnd=$user[Time];
+          $i=1;
+
+        }
+        if($i==0)$this->schoolEnd=null;
+      }
         function popup(){
           $this->construct("localhost","root","soft4","pbl");
           $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
