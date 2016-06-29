@@ -1,5 +1,7 @@
 <?php
+// StundentsAttend
 // classattend
+// AttendChangeCheck
 class ClassAttendDB {
       function construct($host,$user,$pass,$db){
 	      $this->host = $host;
@@ -14,7 +16,21 @@ class ClassAttendDB {
         $this->fifgen=date("14:00:00");//5time
         // 出席：0遅刻：1欠席：2就活：3病欠：4公欠：5
         }
-        function gotime($date){
+        function myname($userid){
+          $this->construct("localhost","root","soft4","pbl");
+          $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+          PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+          $i=0;
+          // school login time
+          $sql="select * from UserTable where UserId=?;";
+          $stmt=$pdo->prepare($sql);
+          $stmt->execute(array($userid));
+          while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
+              $this->myname=$user[Name];
+            }
+        }
+
+        function gotime($date,$user){
           $this->construct("localhost","root","soft4","pbl");
           $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
           PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
@@ -25,6 +41,8 @@ class ClassAttendDB {
           $date=date("Y-m-d",strtotime($date));
           // echo $date;
           $stmt->execute(array($date."%",0,$_SESSION["USERID"]));
+          if($_SESSION["USERID"]=="teacher")
+          $stmt->execute(array($date."%",0,$_GET["id"]));
           while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
               $this->schoolLogin=$user[Time];
               $i=1;
@@ -33,10 +51,11 @@ class ClassAttendDB {
           $sql="select * from SchoolAttendTable where from_unixtime(Time) like ? and Type=? and UserId=?;";
           $stmt=$pdo->prepare($sql);
           $stmt->execute(array($date."%",1,$_SESSION["USERID"]));
+          if($_SESSION["USERID"]=="teacher")
+          $stmt->execute(array($date."%",1,$_GET["id"]));
           while($user=$stmt->fetch(PDO::FETCH_ASSOC)){
           $this->schoolEnd=$user[Time];
           $i=1;
-
         }
         if($i==0)$this->schoolEnd=null;
       }
@@ -385,7 +404,7 @@ class ClassAttendDB {
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
         //遅延、就活の認可
-      $sql="select Date,u.UserId,Name,Time,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where Date<=? and c.Type in(?,?);";
+      $sql="select Date,u.UserId,Name,Time,c.Type from ClassAttendTable as c join UserTable as u on c.UserId=u.UserId where Date<=? and c.Type in(6,7);";
           $stmt=$pdo->prepare($sql);
           $i=0;
           $stmt->execute(array(date("Y-m-d")));
@@ -509,6 +528,7 @@ class ClassAttendDB {
                     $this->nowY=$cal["YEAR(Date)"];
         }
       }
+      //登校確認
       function StundentsAttend($Date){
         $this->construct("localhost","root","soft4","pbl");
         $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
@@ -527,6 +547,8 @@ class ClassAttendDB {
 
               $i=$i+1;
         }
+        // 下校済み
+
       // // 未登校
       $sql="select * from UserTable where UserId not in(select UserId from SchoolAttendTable where from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') group by UserId)and UserId!=?";
       $stmt=$pdo->prepare($sql);
@@ -545,6 +567,42 @@ class ClassAttendDB {
           array_multisort($userid,SORT_ASC,$this->attend);
 
       }
+
+      function StundentsAttendEnd($Date){
+        $this->construct("localhost","root","soft4","pbl");
+        $pdo = new PDO ($this->dsn, $this->user, $this->pass, array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'"));
+      //
+      //   //下校確認
+        $sql="select U.UserId,Name,S.Type,Time from SchoolAttendTable as S join UserTable as U on S.UserId=U.UserId  where  from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') and S.Type=? group by S.UserId;";
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array($Date,1));
+        $i=0;
+        while($attend=$stmt->fetch(PDO::FETCH_ASSOC)){
+            $this->attendend[$i][userid]=$attend[UserId];
+            $this->attendend[$i][name]=$attend[Name];
+            $this->attendend[$i][type]=$attend[Type];
+            $this->attendend[$i][time]=$attend[Time];
+              $i=$i+1;
+        }
+      // // 未登校
+      $sql="select * from UserTable where UserId not in(select UserId from SchoolAttendTable where from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') group by UserId)and UserId!=?";
+      $stmt=$pdo->prepare($sql);
+      $stmt->execute(array($Date,"teacher"));
+      while($attend=$stmt->fetch(PDO::FETCH_ASSOC)){
+          $this->attendend[$i][userid]=$attend[UserId];
+          $this->attendend[$i][name]=$attend[Name];
+          $this->attendend[$i][type]=3;//未投稿
+          $this->attendend[$i][time]=0;//未投稿
+
+            $i=$i+1;
+          }
+          foreach($this->attendend as $key=>$value){
+                      $userid[$key]=$value["userid"];
+                  }
+          array_multisort($userid,SORT_ASC,$this->attendend);
+      }
+
 
       //登校日変更
       function AttendChange($Flag,$Date,$start,$end){

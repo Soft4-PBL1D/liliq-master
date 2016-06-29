@@ -130,7 +130,7 @@ $ClassAttendDB->popup();
 	<div class="list">
 
 
-  <form method="POST" action="list.php">
+  <form method="POST" action="teacher.php">
   <?php
   echo "<select name=\"YEAR\">";
 
@@ -187,6 +187,7 @@ $_SESSION["DATE"]=$day;
 }
 else {
 $_SESSION["DATE"]=date("Y-m-d");
+echo $_SESSION["DATE"];
 }
 if(!isset($i)){
   $i=0;
@@ -196,17 +197,27 @@ if(!isset($i)){
 
 <?php
 $ClassAttendDB->StundentsAttend($_SESSION["DATE"]);
+$ClassAttendDB->StundentsAttendEnd($_SESSION["DATE"]);
 $cnt=count($ClassAttendDB->attend);
+$cnt2=count($ClassAttendDB->attendend);
+echo "<table>";
+echo "<tr><th>出席番号</th><th>氏名</th><th>登校</th><th></th><th>下校</th><tr>";
 for($i=0;$i<$cnt;$i++){
-echo $ClassAttendDB->attend[$i][userid];
-echo $ClassAttendDB->attend[$i][name];
-if($ClassAttendDB->attend[$i][type]==0){
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon3'></span></a>";
-}
+echo "<tr><td>".$ClassAttendDB->attend[$i][userid]."</td>";
+echo "<td>".$ClassAttendDB->attend[$i][name]."</td>";
+
+if($ClassAttendDB->attend[$i][type]==0)
+echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon3'></span></a></td>";
 else
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
-echo "<br>";
+echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon4'></span></a></td>";
+echo "<td>&nbsp;&nbsp;&nbsp;</td>";
+if($ClassAttendDB->attendend[$i][type]==1)
+echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon3'></span></a></td>";
+else
+echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon4'></span></a></td>";
+echo "</tr>";
 }
+echo "</table>";
 ?>
 
 	</div><!-- list -->

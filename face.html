@@ -1,15 +1,28 @@
 <html>
-	<video id="camera" width="400" height="300" autoplay></video>
-	<canvas id="image" width="400" height="300"></canvas>
-	<canvas id="overlay" width="400" height="300"></canvas>
-	<canvas id="face" width="400" height="300"></canvas>
-	<input type=button id='bt' value='get'>
-	<input type=button id='auth' value='auth'>
-	<input type=button id='reg' value='reg'>
-	<input type=text id='uid' value='amfys'>
+<head>
+<meta charset="utf-8" />
+<title>LILIQ Develop - Waiting..</title>
+<link rel="stylesheet" type="text/css" href="/faceLogin/screen.css">
+</head>
+<body>
+	<video id="camera" width="400" height="300" autoplay style='visible:false;position:absolute; top:-1000px; left:-1000px'></video>
+	<canvas id="image" width="400" height="300" style='visible:false;position:absolute; top:-1000px; left:-1000px'></canvas>
+	<canvas id="overlay" width="400" height="300" style='visible:false;position:absolute; top:-1000px; left:-1000px'></canvas>
+  <div id="screen_blue">
+    <div id="screen_box">
 
-	<script src="clmtrackr-dev/clmtrackr.js"></script>
-	<script src="clmtrackr-dev/models/model_pca_20_svm.js"></script>	
+
+      <div id="screen_captcha">
+        <div id="bigtext_box">
+            <DIV class="bigclock_txt" style="font-size:70px;"><canvas id="face" width="180px" height="200px" style="border:1px solid #000;background:#000;"></canvas><div id='pname' style="float:right;margin-top:30px;padding-right:37px;">正面を向いてREG</div></DIV>
+	<input type=button id='bt' value='開始'>
+	<input type=button id='reg' value='reg'>
+	<input type=text id='uid' value='' placeholder='ユーザID'>
+	</div></div></div></div>
+</body>
+
+	<script src="/faceLogin/clmtrackr-dev/clmtrackr.js"></script>
+	<script src="/faceLogin/clmtrackr-dev/models/model_pca_20_svm.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
 				var localMediaStream = null;
