@@ -74,21 +74,21 @@ $nowY=$ClassAttendDB->nowY;
 	<h2 class='title'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
-		<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
+		<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
 		<a href="calendar.php?month=1"> > </a>
 		<?php }else if($month==1){?>
-			<a href="calendar.php?month=12"> < </a>
-			<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+			<a href="studentsCalendar.php?month=12"> < </a>
+			<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
 			<?php }else if($month==4){?>
-				<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
 			<?php }else if($month!=3){?>
-				<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
-				<a href="calendar.php?month=<?php echo $month+1?>"> >  </a>
+				<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
+				<a href="studentsCalendar.php?month=<?php echo $month+1?>"> >  </a>
 	<?php }else{?>
-		<a href="calendar.php?month=<?php echo $month-1?>"> < </a>
+		<a href="studentsCalendar.php?month=<?php echo $month-1?>"> < </a>
 		<?php } ?>
 <h2>月の指定：
-<form method="GET" action="calendar.php">
+<form method="GET" action="">
 <SELECT name="month">
 <OPTION value="4">4</OPTION>
 <OPTION value="5">5</OPTION>
@@ -134,14 +134,14 @@ $ClassAttendDB->Calendar($year,$month);
 				continue;
 			}
 			$day = $dayPointer + 1;
-	    $type=$ClassAttendDB->Attend_select($_SESSION["USERID"],$year."-".$month."-".$day);
+	    $type=$ClassAttendDB->Attend_select($_GET["id"],$year."-".$month."-".$day);
       for($i=0;$i<$dayPointer+1;$i++){
       if($ClassAttendDB->calendar[$day]==$day){
 
         echo "<span class='day holid'><span class='text'>{$day}日</span><font size=1>休日<br>&nbsp;</font></span>";
 			}else{
 				// $ClassAttendDB->startTime($year."-".$month."-".$day);
-				$ClassAttendDB->gotime($year."-".$month."-".$day);
+				$ClassAttendDB->gotime($year."-".$month."-".$day,$_GET["id"]);
 				if(isset($ClassAttendDB->schoolLogin)){
 				$start=date("H:i:s",$ClassAttendDB->schoolLogin);
 			}
@@ -152,12 +152,12 @@ $ClassAttendDB->Calendar($year,$month);
 				else
 				$end="未下校";
 				if($type==0||$type==3||$type==5)
-    			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日○</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
+    			echo "<a href=detail.php?date=$year-$month-$day&id={$_GET["id"]}><span class='day attend'><span class='text'>{$day}日○</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
     			//遅刻、結石があれば
     			else if ($type!=8 && $type!=0)
-    			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日●</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
+    			echo "<a href=detail.php?date=$year-$month-$day&id={$_GET["id"]}><span class='day attend'><span class='text'>{$day}日●</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
     			else
-    			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
+    			echo "<a href=detail.php?date=$year-$month-$day&id={$_GET["id"]}><span class='day attend'><span class='text'>{$day}日</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
           // echo "<span class='day'><span class='text'>{$day}日</span></span>";
      }
       break;
