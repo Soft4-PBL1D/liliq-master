@@ -32,7 +32,7 @@
       <h2>パスワードを変更してください。</h2>
     </div>
     <div class="note">
-      <a  href="#" onclick="javascript:window.history.back(-1);return false;" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
+      <a  href="../students/students.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
         <p>変更後のパスワードは、６文字以上１０文字以下である必要があります。</p>
         <form method="post" action="">
           <!-- パスワードを変更したらテキストフィールドを 隠し指定時間後トップ画面に繊維 -->

@@ -31,7 +31,7 @@
   //パスワード変更ボタンを押されたら実行
   if(isset($_POST["passcheck"])){
     if($_SESSION["USERID"]==$pass){
-      $message.="<br>パスワード６文字以上10文字以下を入力してください<br>";
+      $message.="<br><h2 style='color:#f00;'>このパスワードは使用できません。</h2><br>";
       return $message;
     }
     if(($pass!=null)&&!strstr($password,$userid)){
@@ -39,19 +39,19 @@
     // passcheck
     // $ パスワードは６文字以上１０文字以下
       if(mb_strlen($pass)<6 ||mb_strlen($pass)>10):
-        $message.="<br>パスワード６文字以上10文字以下を入力してください<br>";
+        $message.="<br><h2 style='color:#f00;'>パスワード６文字以上10文字以下を入力してください</h2><br>";
         return $message;
         // exit;
       endif;
       if(SHA1($pass)==$password):
         // no SHA
         // if(strstr($pass,$password)):
-        $message.="<br>IDと違うパスワードを入力してください";
+        $message.="<br><h2 style='color:#f00;'>IDと違うパスワードを入力してください</h2>";
         return $message;
         // exit;
         endif;
       if($pass!=$_POST["passwordcheck"]):
-        $message.="<br>パスワードが一致していません";
+        $message.="<br><h2 style='color:#f00;'>パスワードが一致していません</h2>";
         return $message;
       endif;
   // type check
@@ -97,7 +97,7 @@
 
       endif;
     }else
-      return $comment="<br>パスワード６文字以上10文字以下を入力してください<br>";;
+      return $comment="<br><h2 style='color:#f00;'>パスワード６文字以上10文字以下を入力してください</h2><br>";;
     }
 //
     }
@@ -287,7 +287,7 @@ function Login_general(){
       // if($_POST["password"]!=$_SESSION["PASSWORD"]||$_POST["userid"]!=$_SESSION["USERID"]){
       $errorMessage="パスワードまたはID miss";
       if($_POST["userid"]==null||$_POST["password"]=null){
-        $errorMessage="パスワードまたはIDが入力されていません";
+        $errorMessage="<h2 style='color:#f00;'>パスワードまたはIDが入力されていません</h2>";
       }
     }
 }

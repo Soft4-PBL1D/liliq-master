@@ -10,7 +10,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 <html lang=en>
 <head>
   <meta charset="UTF-8">
-  <title>ログイン　|　LILIQ</title>
+  <title>LILIQ</title>
   <link rel="stylesheet" type="text/css" href="../students/as.css">
 </head>
 <body>
@@ -26,8 +26,8 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 
   <div class="seet">
     <div class="seetco">
-      <h2><?php echo $_SESSION["NAME"]; ?></h2>
-      <p><?php echo $_SESSION["USERID"]; ?></p>
+      <h2>教員用ページ</h2>
+      <p>teacher</p>
     </div>
   </div>
 
@@ -38,6 +38,9 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
     <div class="wn">
 
       <div class="note">
+
+        <a href="teacher.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">« 戻る</a>
+
 <?php
 // error_reporting(0);
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
@@ -65,5 +68,16 @@ $cnt=count($Cl->userid);
 
 </div>
 </div>
+
+
+<div class="wn">
+
+  <div class="note">
+    &copy; Dfun.
+  </div>
+
+</div>
+
+
 </body>
 </html>

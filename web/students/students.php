@@ -52,6 +52,8 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 
     <div class="note">
       &copy; Dfun.
+    </div>
+
   </div>
 
 
