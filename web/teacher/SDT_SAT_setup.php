@@ -1,5 +1,12 @@
 <meta charset="utf-8">
 <?php
+session_start();
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+teacherCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}
 //GoogleカレンダーAPIから祝日を取得
 function getHolidays($year) {
 	$apiKey="AIzaSyCD1yiodJTU0p6UGoPx-iXuH4_GIgWvhkI";

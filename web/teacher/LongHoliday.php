@@ -1,5 +1,12 @@
 <?php
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+session_start();
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+teacherCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
 $now=$ClassAttendDB->nowY-1;

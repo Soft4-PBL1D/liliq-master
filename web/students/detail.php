@@ -7,7 +7,12 @@
 <?php
 error_reporting(0);
 session_start();
-
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+studentsCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->classattend($_SESSION["USERID"],$_GET["date"]);
