@@ -29,9 +29,25 @@ $ClassAttendDB->NameSelect($_SESSION["USERID"]);
         <div id="text_box">
           <div id="ck">　</div>
           <?php
-          if($ClassAttendDB->Type==1 || $ClassAttendDB->Type==null)
-          echo "<h1 id='status'>出席</h1>";
-          else echo "<h1 id='status'>下校</h1>";
+          //当日の登校時間の取得
+           $ClassAttendDB->AttendTime();
+          if($ClassAttendDB->Type==1 || $ClassAttendDB->Type==null){
+            //遅れて学校に来た場合の処理
+            if($ClassAttendDB->start<strtotime(date("Y-m-d H:i:s"))){
+            header("Location:late.php");
+            exit;
+            }
+            echo "<h1 id='status'>出席</h1>";
+          }
+          //下校処理
+          else{
+            //早く帰った場合の理由記入ページ
+            if($ClassAttendDB->end>strtotime(date("Y-m-d H:i:s"))){
+              header("Location:late2.php");
+              exit;
+            }
+             echo "<h1 id='status'>下校</h1>";
+           }
           ?>
           <script>
           var ccnt = 5;

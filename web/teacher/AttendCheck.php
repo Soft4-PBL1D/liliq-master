@@ -46,20 +46,6 @@ $genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待�
 $Cl = new ClassAttendDB();
 $Cl->AttendChangeCheck();
 $cnt=count($Cl->userid);
-/*for($i=0;$i<$cnt;$i++){
-  if(date("14:50:00")<date("H:i:s")){
-  echo $Cl->userdate[$i]."\n\n\n";
-  echo $Cl->userid[$i]."::";
-  echo $Cl->username[$i]."さん";
-  if($Cl->usertype[$i]==8){?>
-    <!-- ($UserId,$NowType,$ChangeType,$Date) -->
-    登校していないまたは下校処理ができていません
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=0";?>">出席</a>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i]."&Type=".$Cl->usertype[$i]."&Date=".$Cl->userdate[$i]."&i=2";?>">欠席</a>
-    <br>
-<?php }
-  }
-  */
   //遅延、就活でのちコクの許可、出席状況の変更依頼
     for($i=0;$i<$cnt;$i++){
     echo $Cl->userdate[$i]."\n\n\n";
@@ -67,7 +53,7 @@ $cnt=count($Cl->userid);
     echo $Cl->username[$i]."さん";
     echo $Cl->usertime[$i]."限目";
     echo $genre[$Cl->usertype[$i]];?>
-    //認可ボタン　０認証　１拒否
+    <!-- //認可ボタン　０認証　１拒否 -->
     <a id="btn_n" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=0';?>">認可</a>
     <a id="btn_t" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=1';?>">拒否</a>
   <?php
