@@ -60,8 +60,9 @@ $cnt=count($Cl->userid);
     echo $Cl->username[$i]."さん";
     echo $Cl->usertime[$i]."限目";
     echo $genre[$Cl->usertype[$i]];?>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=0';?>">認可</a>
-    <a href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=1';?>">拒否</a>
+    //認可ボタン　０認証　１拒否
+    <a id="btn_n" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=0';?>">認可</a>
+    <a id="btn_t" href="AttendChange.php?Id=<?php echo $Cl->userid[$i].'&Type='.$Cl->usertype[$i].'&Date='.$Cl->userdate[$i].'&Time='.$Cl->usertime[$i].'&i=1';?>">拒否</a>
   <?php
   echo "<br>";
 }
