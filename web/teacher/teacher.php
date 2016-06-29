@@ -25,18 +25,7 @@ $ClassAttendDB->popup();
 <!DOCTYPE html>
 
 <head>
-  <script type="text/javascript">
-  $(window).load(function () {
-      // 「id="jQueryBox"」を非表示
-      $("#showw").css("display", "none");
 
-      // 「id="jQueryPush"」がクリックされた場合
-      $("#btnopen").click(function(){
-          // 「id="jQueryBox"」の表示、非表示を切り替える
-          $("#showw").toggle();
-      });
-  });
-  </script>
 <meta charset="utf-8">
 <title>教員トップページ</title>
 	<!-- 各種読み込み -->
@@ -87,21 +76,11 @@ $ClassAttendDB->popup();
 <div id="header">
 	<div class="iti">
 	<div class="logo"></div>
-	<div class="btnrighter" style="width:700px;position:relative;">
-
-    <a href="LongHoliday.php" class="btn_hvr-fade"><span>長期休暇登録</span></a>
-    <a href="csv.php" class="btn_hvr-fade"><span>新年度登録</span></a>
+	<div class="btnrighter" style="width:700px;">
+    	<a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+    <a href="LongHoliday.php" class="btns_hvr-fade"><span>長期休暇登録</span></a>
+    <a href="csv.php" class="btns_hvr-fade"><span>新年度登録</span></a>
 		<a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
-
-  <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
-  <a href="#" id="btnopen" class="btns_hvr-fade"><span>設定</span></a>
-
-<div style="position:absolute;top:200px;display:none;" id="showw">
-  <a href="LongHoliday.php" class="btn_hvr-fade" id="btna"><span>長期休暇登録</span></a>
-  <a href="csv.php" class="btn_hvr-fade" id="btna"><span>新年度登録</span></a>
-  <a href="../Login/password.php" class="btns_hvr-fade" id="btna"><span>パスワード変更</span></a>
-</div>
-
 	</div><!-- btnrighter -->
 	</div><!-- logo -->
 	</div><!-- iti -->
@@ -130,7 +109,7 @@ $ClassAttendDB->popup();
 	<div class="list">
 
 
-  <form method="POST" action="teacher.php">
+  <form method="POST" action="list.php">
   <?php
   echo "<select name=\"YEAR\">";
 
@@ -187,7 +166,6 @@ $_SESSION["DATE"]=$day;
 }
 else {
 $_SESSION["DATE"]=date("Y-m-d");
-echo $_SESSION["DATE"];
 }
 if(!isset($i)){
   $i=0;
@@ -197,27 +175,17 @@ if(!isset($i)){
 
 <?php
 $ClassAttendDB->StundentsAttend($_SESSION["DATE"]);
-$ClassAttendDB->StundentsAttendEnd($_SESSION["DATE"]);
 $cnt=count($ClassAttendDB->attend);
-$cnt2=count($ClassAttendDB->attendend);
-echo "<table>";
-echo "<tr><th>出席番号</th><th>氏名</th><th>登校</th><th></th><th>下校</th><tr>";
 for($i=0;$i<$cnt;$i++){
-echo "<tr><td>".$ClassAttendDB->attend[$i][userid]."</td>";
-echo "<td>".$ClassAttendDB->attend[$i][name]."</td>";
-
-if($ClassAttendDB->attend[$i][type]==0)
-echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon3'></span></a></td>";
-else
-echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon4'></span></a></td>";
-echo "<td>&nbsp;&nbsp;&nbsp;</td>";
-if($ClassAttendDB->attendend[$i][type]==1)
-echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon3'></span></a></td>";
-else
-echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon4'></span></a></td>";
-echo "</tr>";
+echo $ClassAttendDB->attend[$i][userid];
+echo $ClassAttendDB->attend[$i][name];
+if($ClassAttendDB->attend[$i][type]==0){
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon3'></span></a>";
 }
-echo "</table>";
+else
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
+echo "<br>";
+}
 ?>
 
 	</div><!-- list -->
