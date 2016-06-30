@@ -1,3 +1,16 @@
+<?php
+error_reporting(0);
+if(!isset($_SESSION)){
+session_start();
+}
+require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
+require("/var/www/Function/LoginFunction/LoginCheak.php");
+teacherCheak();
+if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
+  header("Location:../Login/password.php");
+  exit;
+}
+?>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +39,7 @@
     <h2>教員用ページ</h2>
     <p>新年度登録機能</p>
   </div>
-
+<?php exec("nohup php -c '' 'SDT_SAT_setup.php' > /dev/null &");?>
 </div>
 
 <div class="page">
