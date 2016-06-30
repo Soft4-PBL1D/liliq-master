@@ -41,7 +41,7 @@ if($_GET["YEAR0"]){
 <div id="header">
   <div class="iti">
     <div class="logo"></div>
-    <div class="btnrighter">
+    <div class="btnrighter" style="width:700px;position:relative;">
       <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
     <a href="LongHoliday.php" class="btns_hvr-fade"><span>長期休暇登録</span></a>
     <a href="csv.php" class="btns_hvr-fade"><span>新年度登録</span></a>
@@ -68,7 +68,7 @@ if($_GET["YEAR0"]){
 <a href="teacher.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
 
 
-<h1>長期休みの設定</h1>
+<h1 style="font-size:30px;">長期休みの設定</h1>
 <form method="GET" action="">
 <?php
 for($j=0;$j<=1;$j++){
