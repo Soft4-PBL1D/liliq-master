@@ -210,20 +210,8 @@ echo "<td>&nbsp;&nbsp;&nbsp;</td>";
 if($ClassAttendDB->attendend[$i][type]==1)
 echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon3'></span></a></td>";
 else
-<<<<<<< HEAD
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
-
-if($ClassAttendDB->attendend[$i][type]==1){
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon3'></span></a>";
-}
-else
-echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
-echo "<br>";
-echo "<br>";
-=======
 echo "<td><a href=studentsCalendar.php?id={$ClassAttendDB->attend[$i][userid]}><span class='icon icon4'></span></a></td>";
 echo "</tr>";
->>>>>>> c1258d78ce9e293b5d57c1383b14371a60759606
 }
 echo "</table>";
 ?>
