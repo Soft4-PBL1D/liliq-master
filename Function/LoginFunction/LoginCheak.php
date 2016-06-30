@@ -1,6 +1,7 @@
 <?php
 
 function teacherCheak(){
+  error_reporting(0);
   if(!isset($_SESSION)){
 session_start();
 }
@@ -14,6 +15,7 @@ session_start();
     }
 }
 function studentsCheak(){
+  error_reporting(0);
   if(!isset($_SESSION)){
   session_start();
   }

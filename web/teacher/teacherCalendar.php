@@ -120,7 +120,7 @@ $nowY=$ClassAttendDB->nowY;
 	<span class='day date'>日</span><span class='day date'>月</span><span class='day date'>火</span><span class='day date'>水</span><span class='day date'>木</span><span class='day date'>金</span><span class='day date'>土</span>
 <?php
 session_start();
-error_reporting(1);
+error_reporting(0);
 $ClassAttendDB->Calendar($year,$month);
 	for ($i = 0; $i < 6; $i++) {
 		echo "<div class='week'>";

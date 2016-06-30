@@ -109,7 +109,7 @@ $ClassAttendDB->popup();
 	<div class="list">
 
 
-  <form method="POST" action="list.php">
+  <form method="POST" action="teacher.php">
   <?php
   echo "<select name=\"YEAR\">";
 
@@ -175,6 +175,7 @@ if(!isset($i)){
 
 <?php
 $ClassAttendDB->StundentsAttend($_SESSION["DATE"]);
+$ClassAttendDB->StundentsAttendEnd($_SESSION["DATE"]);
 $cnt=count($ClassAttendDB->attend);
 for($i=0;$i<$cnt;$i++){
 echo $ClassAttendDB->attend[$i][userid];
@@ -184,6 +185,13 @@ echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION
 }
 else
 echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
+
+if($ClassAttendDB->attendend[$i][type]==1){
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon3'></span></a>";
+}
+else
+echo "<a href=detail.php?id={$ClassAttendDB->attend[$i][userid]}&date={$_SESSION["DATE"]}><span class='icon icon4'></span></a>";
+echo "<br>";
 echo "<br>";
 }
 ?>

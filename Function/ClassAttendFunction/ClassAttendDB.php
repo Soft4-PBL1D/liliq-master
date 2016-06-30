@@ -3,6 +3,7 @@
 // StundentsAttend
 // classattend
 // AttendChangeCheck
+// StundentsAttend
 class ClassAttendDB {
       function construct($host,$user,$pass,$db){
 	      $this->host = $host;
