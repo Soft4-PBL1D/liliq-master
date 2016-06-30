@@ -123,10 +123,10 @@ $ClassAttendDB->popup();
 	<div class="wn">
 	<div class="note">
 		<div class="title">
-			<p><strong>学生リスト</strong></p>
+			<h1 style="font-size:30px;">学生リスト</h1>
 		</div><!-- title -->
 
-	<div class="wn2">
+	<div class="wn">
 	<div class="list">
 
 
