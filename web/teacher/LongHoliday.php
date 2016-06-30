@@ -16,12 +16,55 @@ if($_GET["YEAR0"]){
  $ClassAttendDB->Vacation($date1,$date2);
   }
 ?>
+
+
+
+
+
+
+
 <html land="en">
+
+
+
 <head>
-<title>長期休みの設定</title>
+  <meta charset="utf-8">
+  <title>ログイン</title>
+  <link rel="stylesheet" type="text/css" href="../students/as.css">
 </head>
 <body>
-長期休みの設定
+
+<div id="header">
+  <div class="iti">
+    <div class="logo"></div>
+    <div class="btnrighter">
+      <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+    <a href="LongHoliday.php" class="btns_hvr-fade"><span>長期休暇登録</span></a>
+    <a href="csv.php" class="btns_hvr-fade"><span>新年度登録</span></a>
+		<a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="seet">
+  <div class="seetco">
+    <h2><?php echo $_SESSION["NAME"]; ?></h2>
+    <p><?php echo $_SESSION["USERID"]; ?></p>
+  </div>
+</div>
+
+<div class="page">
+<div class="coram">
+
+
+  <div class="wn">
+
+    <div class="note">
+
+<a href="teacher.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
+
+
+<h1>長期休みの設定</h1>
 <form method="GET" action="">
 <?php
 for($j=0;$j<=1;$j++){
@@ -65,3 +108,21 @@ echo "まで";}
 ?>
 <input type="submit" value="送信">
 </form>
+
+
+</div><!-- note -->
+</div><!-- wn -->
+
+
+<div class="wn">
+<div class="note">
+  &copy; 2016 Dfun.
+</div><!-- note -->
+</div><!-- wn -->
+
+
+</div><!-- coram -->
+</div><!-- page -->
+
+</body>
+</html>
