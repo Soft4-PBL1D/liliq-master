@@ -33,7 +33,7 @@ require("/var/www/Function/LoginFunction/Logindb.php");
   <!-- </fieldset> -->
   </form>
 
-    <div style="color:#f00;width:300px;margin:0 auto;margin-top:30px;text-align:center;"><?php echo $errorMessage ?></div>
+    <div style="color:#f00;width:300px;margin:0 auto;margin-top:30px;text-align:center;"></div>
 </div></div>
 
 
