@@ -466,14 +466,15 @@ class ClassAttendDB {
           echo $ChangeType."<br>";
           echo $Date."<br>";
           echo $Time."<br>";
-          if($NowType==6) $sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
-          if($NowType==7) $sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
-          if($NowType==10)$sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
-          if($NowType==11)$sql="update ClassAttendTable set Type=1 where UserId=? and Date=? and Time=?";
-          if($NowType==12)$sql="update ClassAttendTable set Type=2 where UserId=? and Date=? and Time=?";
-          if($NowType==13)$sql="update ClassAttendTable set Type=3 where UserId=? and Date=? and Time=?";
-          if($NowType==14)$sql="update ClassAttendTable set Type=4 where UserId=? and Date=? and Time=?";
-          if($NowType==15)$sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
+          // if($NowType==6) $sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
+          // if($NowType==7) $sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
+          // if($NowType==10)$sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
+          // if($NowType==11)$sql="update ClassAttendTable set Type=1 where UserId=? and Date=? and Time=?";
+          // if($NowType==12)$sql="update ClassAttendTable set Type=2 where UserId=? and Date=? and Time=?";
+          // if($NowType==13)$sql="update ClassAttendTable set Type=3 where UserId=? and Date=? and Time=?";
+          // if($NowType==14)$sql="update ClassAttendTable set Type=4 where UserId=? and Date=? and Time=?";
+          // if($NowType==15)$sql="update ClassAttendTable set Type=5 where UserId=? and Date=? and Time=?";
+          $sql="update ClassAttendTable set Type=0 where UserId=? and Date=? and Time=?";
           $stmt=$pdo->prepare($sql);
           $stmt->execute(array($UserId,$Date,$Time));
         }
