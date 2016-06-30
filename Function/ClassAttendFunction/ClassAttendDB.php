@@ -6,6 +6,10 @@
 // StundentsAttend
 class ClassAttendDB {
       function construct($host,$user,$pass,$db){
+        error_reporting(0);
+        if(!isset($_SESSION)){
+        session_start();
+        }
 	      $this->host = $host;
 	      $this->user = $user;
 	      $this->pass = $pass;
