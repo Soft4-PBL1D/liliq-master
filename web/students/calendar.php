@@ -157,13 +157,8 @@ $ClassAttendDB->Calendar($year,$month);
 				$end=date("H:i:s",$ClassAttendDB->schoolEnd);
 				else
 				$end="未下校";
-<<<<<<< HEAD
 				if($type==0||$type==3)
     			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日○</span><font size=1>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
-=======
-				if($type==0||$type==3||$type==5)
-    			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日</span><span style='position:absolute;top:5px;left:5px;color:green;font-size:25px;font-weight:bold;'>●</span><font size=3>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
->>>>>>> a5b9c3c746d534b00f457b222f7423ac4bd71566
     			//遅刻、結石があれば
     			else if ($type!=8 && $type!=0)
     			echo "<a href=detail.php?date=$year-$month-$day><span class='day attend'><span class='text'>{$day}日</span><span style='position:absolute;top:5px;left:5px;color:red;font-size:25px;font-weight:bold;'>●</span><font size=3>登校時間:{$start}<br>下校時間:{$end}</font></span></a>";
