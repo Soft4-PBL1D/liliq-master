@@ -1,10 +1,14 @@
 <?php
+error_reporting(0);
+if(!isset($_SESSION)){
+session_start();
+}
+
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
 $ClassAttendDB = new ClassAttendDB();
 $ClassAttendDB->nowYear();
 $nowY=$ClassAttendDB->nowY;
 $ClassAttendDB->myname($_GET["id"]);
-session_start();
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 teacherCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){

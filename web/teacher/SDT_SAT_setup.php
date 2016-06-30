@@ -1,6 +1,10 @@
 <meta charset="utf-8">
 <?php
+error_reporting(0);
+if(!isset($_SESSION)){
 session_start();
+}
+
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 teacherCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){

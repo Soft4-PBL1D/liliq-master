@@ -555,7 +555,7 @@ class ClassAttendDB {
             $this->attend[$i][time]=$attend[Time];
               $i=$i+1;
         }
-      // // 未登校
+        // 未登校
         $sql="select * from UserTable where UserId not in(select UserId from SchoolAttendTable where from_unixtime(Time) like Date_format(?,'%Y-%m-%d%') group by UserId)and UserId!=?";
         $stmt=$pdo->prepare($sql);
         $stmt->execute(array($Date,"teacher"));

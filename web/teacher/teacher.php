@@ -1,8 +1,12 @@
 <?php
 error_reporting(0);
+if(!isset($_SESSION)){
+session_start();
+}
+
 require("/var/www/Function/SchoolAttendFunction/SchoolAttend.php");
 require("/var/www/Function/ClassAttendFunction/ClassAttendDB.php");
-session_start();
+
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 teacherCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){

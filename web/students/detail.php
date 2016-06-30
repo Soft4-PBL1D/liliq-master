@@ -6,7 +6,10 @@
   <a href="calendar.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
 <?php
 error_reporting(0);
+if(!isset($_SESSION)){
 session_start();
+}
+
 require("/var/www/Function/LoginFunction/LoginCheak.php");
 studentsCheak();
 if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){

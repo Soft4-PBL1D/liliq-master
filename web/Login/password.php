@@ -1,4 +1,10 @@
-<?php require("/var/www/Function/LoginFunction/Logindb.php");
+<?php
+error_reporting(0);
+if(!isset($_SESSION)){
+session_start();
+}
+
+  require("/var/www/Function/LoginFunction/Logindb.php");
       require("/var/www/Function/LoginFunction/LoginCheak.php");
       $comment=password();?>
 
