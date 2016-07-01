@@ -73,17 +73,59 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 ?>
 
 
+
+
+
+
+
+
 <html>
 	<head>
 
 		<meta charset="utf-8">
+    <link rel='stylesheet' href='css/style.css'>
 		<link rel='stylesheet' href='cstyle.css'>
 	</head>
 
 	<body>
+
+
+    <div id="header">
+      <div class="iti">
+        <div class="logo"></div>
+        <div class="btnrighter" style="width:700px;position:relative;">
+
+
+        <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+          <a href="LongHoliday.php" class="btns_hvr-fade"><span>長期休暇登録</span></a>
+          <a href="csv.php" class="btns_hvr-fade"><span>新年度登録</span></a>
+          <a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+
+
+
+
+      	</div><!-- btnrighter -->
+      </div>
+    </div>
+
+    <div class="seet">
+      <div class="seetco">
+        <h2><?php echo $_SESSION["NAME"]; ?></h2>
+        <p><?php echo $_SESSION["USERID"]; ?></p>
+      </div>
+    </div>
+
+    <div class="page">
+    <div class="coram">
+
+
+      <div class="wn">
+
+        <div class="note">
+
 		<!-- //生徒名の表示 -->
 		<?php echo $ClassAttendDB->myname;?>
-	<h2 class='title'><?php echo "{$year}年{$month}月"?>
+	<h2 class='title' style='color:#000;'><?php echo "{$year}年{$month}月"?>
 		<!-- 月の判別 -->
 		<?php if($month==12){?>
 		<a href='studentsCalendar.php?month=<?php echo $month-1?>&id=<?php echo $_GET["id"]?>'> < </a>
@@ -99,7 +141,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 	<?php }else{?>
 		<a href='studentsCalendar.php?month=<?php echo $month-1?>&id=<?php echo $_GET["id"]?>'>< </a>
 		<?php } ?>
-<h2>月の指定：
+<h2 style='color:#000;'>月の指定：
 <form method="GET" action="">
 <SELECT name="month">
 <OPTION value="4">4</OPTION>
@@ -186,6 +228,20 @@ $ClassAttendDB->Calendar($year,$month);
     echo "</div>";
 	}
 ?>
+</div>
+</div>
+</div>
+
+
+<div class="wn">
+
+  <div class="note">
+    &copy; Dfun.
+  </div>
+
+</div>
+
+
 </div>
 	</body>
 

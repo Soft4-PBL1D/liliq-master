@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require("/var/www/Function/LoginFunction/LoginCheak.php");
@@ -26,6 +27,8 @@ exit;
 <html lang="en">
 <head></head>
 <body>
+  <a href="teacherCalendar.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
+
   登校日、登校時間の編集<br>
   <?php echo $Year."年".$Month."月".$Day."日"; ?>
   <form method="GET" action="SDChange.php">

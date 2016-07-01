@@ -145,11 +145,11 @@ $ClassAttendDB->Calendar($year,$month);
 	    // $type=$ClassAttendDB->Attend_select($_SESSION["USERID"],$year."-".$month."-".$day);
       for($i=0;$i<$dayPointer+1;$i++){
       if($ClassAttendDB->calendar[$day]==$day){
-        echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day holid'><span class='text'>{$day}日</span><font size=1>休日<br>&nbsp;</font></span></a>";
+        echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day holid'><span class='text'>{$day}日</span><font size=2>休日<br>&nbsp;</font></span></a>";
 			}else{
 				// $ClassAttendDB->startTime($year."-".$month."-".$day);
 				$ClassAttendDB->startTime($year."-".$month."-".$day);
-    			echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day attend'><span class='text'>{$day}日</span><font size=1>登校日<br>{$ClassAttendDB->starttime}〜{$ClassAttendDB->endtime}</font></span></a>";
+    			echo "<a href='SDChange.php?year=$year&month=$month&day=$day'><span class='day attend'><span class='text'>{$day}日</span><font size=2>登校日<br>{$ClassAttendDB->starttime}〜{$ClassAttendDB->endtime}</font></span></a>";
      }
       break;
     }

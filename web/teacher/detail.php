@@ -2,8 +2,41 @@
 <html lang="en">
 <head>
 <title></title>
+<head>
+  <meta charset="utf-8">
+  <title>ログイン</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="cstyle.css">
 </head>
 <body>
+
+<div id="header">
+  <div class="iti">
+    <div class="logo"></div>
+    <div class="btnrighter">
+      <a href="../Login/logout.php" class="btn_hvr-fade"><span>ログアウト</span></a>
+      <a href="../Login/password.php" class="btns_hvr-fade"><span>パスワード変更</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="seet">
+  <div class="seetco">
+    <h2><?php echo $_SESSION["NAME"]; ?></h2>
+    <p><?php echo $_SESSION["USERID"]; ?></p>
+  </div>
+</div>
+
+<div class="page">
+<div class="coram">
+
+
+  <div class="wn">
+
+    <div class="note">
+
+  <a href="studentsCalendar.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
+
 <?php
 error_reporting(0);
 if(!isset($_SESSION)){

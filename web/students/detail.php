@@ -28,7 +28,7 @@ if(!isset($ClassAttendDB->myname)){
     $ClassAttendDB->AttendChangeApplication($_GET["type$i"],$i,$_GET["date1"],$_SESSION["USERID"]);}
   }
     echo "申請しました";
-    echo "<a href=calendar.php>modoru</a>";
+    echo " - <a href=calendar.php>戻る</a>";
   }
   else{
     echo "休校日";
@@ -45,7 +45,7 @@ $genre=["出席","遅刻","欠席","就活","病欠","公欠","遅延認証待�
 ?>
 <form method="get" action=""><h3 style="font-size:20px;">
 <?php
-echo $_GET["date"]."の出席状況<br>";
+echo "<h2 style='font-size:20px;color:#000;'>".$_GET["date"]."の出席状況を変更申請<br></h2>";
 for($i=1;$i<=5;$i++){
 if($ClassAttendDB->myattend[$i]!=null){
   echo $ClassAttendDB->myattend2[0];
@@ -89,7 +89,7 @@ echo "<input type=hidden name='date1' value={$_GET["date"]}>";
 else
 echo "{$i}時限：おやすみ<br>";
 }
-echo "<input type='submit' name='submit' value='変更依頼'>";
+echo "<input type='submit' name='submit' class='btn_hvr-fade' style='width:200px;height:30px;padding:5px 0;margin-top:10px;' value='変更依頼'>";
 echo "</form>";
 ?>
 </body>

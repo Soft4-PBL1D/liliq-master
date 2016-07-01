@@ -53,7 +53,7 @@ if(sha1($_SESSION["USERID"])==$_SESSION["PASSWORD"]){
 
     <a href="teacher.php" style="display:block;margin-bottom:20px;background:#ddd;width:90px;padding:5px;text-align:center;border:1px solid #666;text-decoration:none;border-radius:1px;">&laquo; 戻る</a>
 		<div class="title">
-			<h2>CSVファイルアップロード</h2>
+			<h2 style="font-size:20px;color:#000;padding:5px;">CSVファイルアップロード</h2>
 		</div>
 		<form action="csvDB.php" method="post" enctype="multipart/form-data">
 
